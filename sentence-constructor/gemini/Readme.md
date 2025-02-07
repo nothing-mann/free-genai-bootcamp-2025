@@ -1,4 +1,4 @@
-## Perplexity AI Powered Assistant Guide
+## Gemini AI Powered Assistant Guide
 
 ### Which Model 
 Gemini (2.0 Flash)
