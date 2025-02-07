@@ -28,6 +28,7 @@ Beginner (JLPT5)
 ### Vocabulary Table
 * 3 columns
 | Japanese (Kanji with furigana) | Romaji | English |
+* Absolutely don't forget to include furigana besides Kanji inside ().
 ### Sentence structure
 * the structure must follow Japanese sentence construction grammar.
 * Parts of Japanese sentence should be enclosed inside [ ]
