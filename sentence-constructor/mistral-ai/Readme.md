@@ -1,4 +1,4 @@
-## Perplexity AI Powered Assistant Guide
+## Mistral AI Powered Assistant Guide
 
 ### Which Model 
 Le Chat (Mistral AI)
