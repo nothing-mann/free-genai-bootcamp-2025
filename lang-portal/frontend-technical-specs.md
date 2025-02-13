@@ -109,9 +109,9 @@ The purpose of this page is to show the details of a word
     - click on a pill should redirect to the word group show page
 #### Needed API Endpoints
 - GET /api/words/:id
-- GET /api/words/:id/word-groups
+- GET /api/words/:id/groups
 
-### Word Groups `/word-groups`
+### Word Groups `/groups`
 #### Purpose
 The purpose of this page is to show all the word groups in our database
 #### Components
@@ -123,9 +123,9 @@ The purpose of this page is to show all the word groups in our database
         - created_at
     - Clicking on the word group name should redirect to the word group show page
 #### Needed API Endpoints
-- GET /api/word-groups
+- GET /api/groups
 
-### Word Group Show Page `/word-groups/:id`
+### Word Group Show Page `/groups/:id`
 #### Purpose
 The purpose of this page is to show the details of a word group
 #### Components
@@ -143,9 +143,9 @@ The purpose of this page is to show the details of a word group
     - should use the same pagination as the study sessions page
     - click on a study session should redirect to the study session show page
 #### Needed API Endpoints
-- GET /api/word-groups/:id  (the name and group stats)
-- GET /api/word-groups/:id/words
-- GET /api/word-groups/:id/study-sessions
+- GET /api/groups/:id  (the name and group stats)
+- GET /api/groups/:id/words
+- GET /api/groups/:id/study-sessions
 
 
 ### Study Sessions Index `/study-sessions`
