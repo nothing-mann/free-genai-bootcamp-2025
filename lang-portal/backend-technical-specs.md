@@ -8,12 +8,33 @@ A language learning school wants to build a prototype of learning portal which w
 
 ## Technical Restriction
 - Use python and flask to build the backend
+- Invoke is a task runner for python
 - Use SQLite3 for database
 - Use python and flask to build API
 - Always return the response from the API in JSON format
 - There will be no authentication or authorization needed
 - There will be no concept of multiple user
 
+## Directory Structure
+```text
+backend-flask/
+├── app/                  # Main application code
+│   ├── models/          # Database models
+│   ├── routes/          # API route handlers
+│   ├── services/        # Business logic
+│   └── __init__.py      # Flask app initialization
+├── db/                  # Database related files
+│   ├── migrations/      # SQL migration files
+│   └── seeds/          # JSON seed data files
+├── tests/              # Test files
+│   ├── unit/          # Unit tests
+│   └── integration/   # Integration tests
+├── config.py          # Configuration settings
+├── requirements.txt   # Python dependencies
+├── tasks.py          # Invoke tasks definition
+├── words.db          # SQLite database file
+└── .gitignore        # Git ignore rules
+```
 ## Database Schema
 Out database will be a single sqlite3 database called `words.db` that will be located in the root folder of `backend-flask`.
 
@@ -450,8 +471,7 @@ Reviews a word review item
     "created_at": "2025-02-13T20:04:22Z"
 }
 ```
-## Invoke Tasks
-Invoke is a task runner for python
+## Task Runner Tasks
 Let's list the possible tasks that we need for our app
 
 ### Initialize Database
