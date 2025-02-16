@@ -1,0 +1,36 @@
+{
+    "group_name": "Basic Greetings",
+    "group_description": "Common greetings and basic expressions in Nepali",
+    "words": [
+        {
+            "nepali": "नमस्ते",
+            "romanized_nepali": "namaste",
+            "english": "hello",
+            "part_of_speech": ["greeting"]
+        },
+        {
+            "nepali": "धन्यवाद",
+            "romanized_nepali": "dhanyabaad",
+            "english": "thank you",
+            "part_of_speech": ["expression"]
+        },
+        {
+            "nepali": "माफ गर्नुहोस्",
+            "romanized_nepali": "maaf garnuhos",
+            "english": "excuse me/sorry",
+            "part_of_speech": ["expression"]
+        },
+        {
+            "nepali": "शुभ प्रभात",
+            "romanized_nepali": "shubha prabhaat",
+            "english": "good morning",
+            "part_of_speech": ["greeting"]
+        },
+        {
+            "nepali": "शुभ रात्री",
+            "romanized_nepali": "shubha raatri",
+            "english": "good night",
+            "part_of_speech": ["greeting"]
+        }
+    ]
+}

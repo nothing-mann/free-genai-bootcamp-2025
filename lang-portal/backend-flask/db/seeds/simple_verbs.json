@@ -1,0 +1,36 @@
+{
+    "group_name": "Simple Verbs",
+    "group_description": "Common everyday verbs in Nepali",
+    "words": [
+        {
+            "nepali": "जानु",
+            "romanized_nepali": "jaanu",
+            "english": "to go",
+            "part_of_speech": ["verb"]
+        },
+        {
+            "nepali": "खानु",
+            "romanized_nepali": "khaanu",
+            "english": "to eat",
+            "part_of_speech": ["verb"]
+        },
+        {
+            "nepali": "पढ्नु",
+            "romanized_nepali": "padhnu",
+            "english": "to read",
+            "part_of_speech": ["verb"]
+        },
+        {
+            "nepali": "सुत्नु",
+            "romanized_nepali": "sutnu",
+            "english": "to sleep",
+            "part_of_speech": ["verb"]
+        },
+        {
+            "nepali": "बस्नु",
+            "romanized_nepali": "basnu",
+            "english": "to sit",
+            "part_of_speech": ["verb"]
+        }
+    ]
+}

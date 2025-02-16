@@ -1,0 +1,22 @@
+{
+    "activities": [
+        {
+            "name": "Vocabulary Flash Cards",
+            "description": "Practice vocabulary using digital flash cards",
+            "instructions": "Click on the card to flip between Nepali and English. Mark yourself correct or incorrect to track progress.",
+            "thumbnail": "https://placehold.co/400x200?text=Flash+Cards"
+        },
+        {
+            "name": "Word Matching",
+            "description": "Match Nepali words with their English translations",
+            "instructions": "Draw lines between matching pairs of Nepali and English words.",
+            "thumbnail": "https://placehold.co/400x200?text=Word+Matching"
+        },
+        {
+            "name": "Spelling Practice",
+            "description": "Practice spelling Nepali words in romanized form",
+            "instructions": "Listen to or read the Nepali word and type its romanized spelling.",
+            "thumbnail": "https://placehold.co/400x200?text=Spelling"
+        }
+    ]
+}

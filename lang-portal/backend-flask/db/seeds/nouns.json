@@ -1,0 +1,36 @@
+{
+    "group_name": "Common Nouns",
+    "group_description": "Basic everyday nouns in Nepali",
+    "words": [
+        {
+            "nepali": "पानी",
+            "romanized_nepali": "paani",
+            "english": "water",
+            "part_of_speech": ["noun"]
+        },
+        {
+            "nepali": "खाना",
+            "romanized_nepali": "khaana",
+            "english": "food",
+            "part_of_speech": ["noun"]
+        },
+        {
+            "nepali": "घर",
+            "romanized_nepali": "ghar",
+            "english": "house",
+            "part_of_speech": ["noun"]
+        },
+        {
+            "nepali": "किताब",
+            "romanized_nepali": "kitaab",
+            "english": "book",
+            "part_of_speech": ["noun"]
+        },
+        {
+            "nepali": "स्कूल",
+            "romanized_nepali": "school",
+            "english": "school",
+            "part_of_speech": ["noun"]
+        }
+    ]
+}
