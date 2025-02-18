@@ -106,3 +106,44 @@ def seed_db(ctx):
             db.session.rollback()
             print(f"Error seeding database: {str(e)}")
             raise
+
+@task
+def install(c):
+    """Install Python dependencies"""
+    c.run("pip install -r requirements.txt")
+
+@task
+def run(c, port=8080):
+    """Run the Flask development server"""
+    c.run(f"flask run --port {port}")
+
+@task
+def test(c):
+    """Run tests"""
+    c.run("pytest tests/ -v")
+
+@task
+def coverage(c):
+    """Run tests with coverage report"""
+    c.run("pytest tests/ -v --cov=app --cov-report=term-missing")
+
+@task
+def clean(c):
+    """Remove Python cache files"""
+    c.run("find . -type d -name __pycache__ -exec rm -r {} +")
+    c.run("find . -type f -name '*.pyc' -delete")
+
+@task
+def reset_db(c):
+    """Reset the database"""
+    c.run('python -c "from app import db, create_app; app = create_app(); app.app_context().push(); db.drop_all(); db.create_all()"')
+
+@task
+def seed_db(c):
+    """Load sample data into database"""
+    c.run('python -c "from app import db, create_app; from tests.fixtures.test_data import SAMPLE_WORDS, SAMPLE_GROUPS, SAMPLE_ACTIVITIES; from app.models import Word, Group, StudyActivity; app = create_app(); app.app_context().push(); [db.session.add(Word(**w)) for w in SAMPLE_WORDS]; [db.session.add(Group(**g)) for g in SAMPLE_GROUPS]; [db.session.add(StudyActivity(**a)) for a in SAMPLE_ACTIVITIES]; db.session.commit()"')
+
+@task
+def lint(c):
+    """Check code style"""
+    c.run("flake8 app tests")

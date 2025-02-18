@@ -1,4 +1,4 @@
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, field_validator
 from typing import List, Optional
 from datetime import datetime
 
@@ -8,13 +8,13 @@ class WordBase(BaseModel):
     english_word: str
     part_of_speech: List[str]
 
-    @validator('nepali_word')
+    @field_validator('nepali_word')
     def validate_nepali_word(cls, v):
         if not v.strip():
             raise ValueError('Nepali word cannot be empty')
         return v
 
-    @validator('part_of_speech')
+    @field_validator('part_of_speech')
     def validate_part_of_speech(cls, v):
         valid_types = ['noun', 'verb', 'adjective', 'adverb', 'pronoun', 
                       'greeting', 'expression', 'phrase', 'question', 'response', 'number']
@@ -30,7 +30,7 @@ class StudyActivityCreate(BaseModel):
 class WordReviewCreate(BaseModel):
     is_correct: bool
 
-    @validator('is_correct')
+    @field_validator('is_correct')
     def validate_is_correct(cls, v):
         if not isinstance(v, bool):
             raise ValueError('is_correct must be a boolean value')
@@ -40,13 +40,13 @@ class PaginationParams(BaseModel):
     page: int = 1
     per_page: int = 20
 
-    @validator('page')
+    @field_validator('page')
     def validate_page(cls, v):
         if v < 1:
             raise ValueError('Page number must be greater than 0')
         return v
 
-    @validator('per_page')
+    @field_validator('per_page')
     def validate_per_page(cls, v):
         if v < 1 or v > 100:
             raise ValueError('Items per page must be between 1 and 100')
