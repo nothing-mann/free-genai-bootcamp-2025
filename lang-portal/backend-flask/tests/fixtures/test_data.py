@@ -12,6 +12,12 @@ SAMPLE_WORDS = [
         "romanized_nepali_word": "dhanyabad",
         "english_word": "thank you",
         "part_of_speech": ["expression"]
+    },
+    {
+        "nepali_word": "कृपया",
+        "romanized_nepali_word": "kripaya",
+        "english_word": "please",
+        "part_of_speech": ["expression"]
     }
 ]
 

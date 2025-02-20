@@ -2,39 +2,28 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from config import Config
-from app.utils.error_handlers import error_handlers
 
 db = SQLAlchemy()
 
 def create_app(config_class=Config):
+    """Create and configure the Flask application"""
     app = Flask(__name__)
     app.config.from_object(config_class)
     
     # Initialize extensions
     db.init_app(app)
-    
-    # Initialize CORS
-    CORS(app, resources={
-        r"/*": {
-            "origins": "*",
-            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-            "allow_headers": ["Content-Type", "Authorization"]
-        }
-    })
-    
-    # Create database tables
-    with app.app_context():
-        db.create_all()
+    CORS(app)
     
     # Register blueprints
-    from app.routes import api
-    app.register_blueprint(api.bp)
-    
-    # Register error handlers
-    app.register_blueprint(error_handlers)
-    
-    @app.route('/')
-    def index():
-        return {"message": "Language Portal API is running"}
+    with app.app_context():
+        from app.routes.api import bp as api_bp
+        app.register_blueprint(api_bp)
+        
+        # Register error handlers
+        from app.utils.error_handlers import error_handlers
+        app.register_blueprint(error_handlers)
+        
+        # Create database tables
+        db.create_all()
     
     return app

@@ -36,27 +36,10 @@ def dashboard():
         )
 
 @bp.route('/words', methods=['GET'])
-def get_words():
+@validate_pagination()
+def get_words(page=1, per_page=20):
     try:
-        page = request.args.get('page', 1, type=int)
-        per_page = request.args.get('per_page', 20, type=int)
-        
-        if page < 1:
-            return error_response(
-                message="Page number must be positive",
-                error_code="VALIDATION_ERROR",
-                status_code=400
-            )
-        
-        if per_page < 1 or per_page > 50:
-            return error_response(
-                message="Items per page must be between 1 and 50",
-                error_code="VALIDATION_ERROR",
-                status_code=400
-            )
-        
         pagination = Word.query.paginate(page=page, per_page=per_page)
-        
         data = {
             "words": [{
                 "id": w.id,
@@ -66,17 +49,7 @@ def get_words():
                 "part_of_speech": w.part_of_speech
             } for w in pagination.items]
         }
-        
-        return success_response(
-            data=data,
-            meta=pagination_meta(pagination)
-        )
-    except ValueError:
-        return error_response(
-            message="Invalid pagination parameters",
-            error_code="VALIDATION_ERROR",
-            status_code=400
-        )
+        return success_response(data=data, meta=pagination_meta(pagination))
     except Exception as e:
         return error_response(
             message="Failed to fetch words",
@@ -97,28 +70,31 @@ def dashboard_statistics():
         )
 
 @bp.route('/groups', methods=['GET'])
-def get_groups():
-    page = request.args.get('page', 1, type=int)
-    per_page = request.args.get('per_page', 20, type=int)
-    
-    pagination = Group.query.paginate(page=page, per_page=per_page)
-    groups = pagination.items
-    
-    return jsonify({
-        "word_groups": [{
-            "id": g.id,
-            "name": g.name,
-            "description": g.description,
-            "total_words": g.total_words  # Using the new property
-        } for g in groups],
-        "pagination": {
-            "page": pagination.page,
-            "per_page": pagination.per_page,
-            "total_pages": pagination.pages,
-            "has_next": pagination.has_next,
-            "has_previous": pagination.has_prev
-        }
-    })
+@validate_pagination()
+def get_groups(page=1, per_page=20):
+    try:
+        pagination = Group.query.paginate(page=page, per_page=per_page)
+        return jsonify({
+            "word_groups": [{
+                "id": g.id,
+                "name": g.name,
+                "description": g.description,
+                "total_words": g.total_words
+            } for g in pagination.items],
+            "pagination": {
+                "page": pagination.page,
+                "per_page": pagination.per_page,
+                "total_pages": pagination.pages,
+                "has_next": pagination.has_next,
+                "has_previous": pagination.has_prev
+            }
+        })
+    except Exception as e:
+        return error_response(
+            message="Failed to fetch groups",
+            error_code="FETCH_ERROR",
+            status_code=500
+        )
 
 @bp.route('/study-sessions/<int:session_id>/words/<int:word_id>/review', methods=['POST'])
 def review_word(session_id, word_id):
@@ -189,29 +165,28 @@ def study_progress():
         )
 
 @bp.route('/study-activities', methods=['GET'])
-def get_study_activities():
-    page = request.args.get('page', 1, type=int)
-    per_page = request.args.get('per_page', 20, type=int)
-    
-    pagination = StudyActivity.query.paginate(page=page, per_page=per_page)
-    activities = pagination.items
-    
-    return jsonify({
-        "study_activities": [{
-            "id": a.id,
-            "name": a.name,
-            "description": a.description,
-            "instructions": a.instructions,
-            "thumbnail": a.thumbnail
-        } for a in activities],
-        "pagination": {
-            "page": pagination.page,
-            "per_page": pagination.per_page,
-            "total_pages": pagination.pages,
-            "has_next": pagination.has_next,
-            "has_previous": pagination.has_prev
-        }
-    })
+@validate_pagination()
+def get_study_activities(page=1, per_page=20):
+    try:
+        pagination = StudyActivity.query.paginate(page=page, per_page=per_page)
+        return success_response(
+            data={
+                "study_activities": [{
+                    "id": a.id,
+                    "name": a.name,
+                    "description": a.description,
+                    "instructions": a.instructions,
+                    "thumbnail": a.thumbnail
+                } for a in pagination.items]
+            },
+            meta=pagination_meta(pagination)
+        )
+    except Exception as e:
+        return error_response(
+            message="Failed to fetch activities",
+            error_code="FETCH_ERROR",
+            status_code=500
+        )
 
 @bp.route('/study-activities/<int:id>', methods=['GET'])
 def get_study_activity(id):
@@ -439,18 +414,23 @@ def full_reset():
 def get_study_sessions(page=1, per_page=20):
     """Get paginated list of study sessions"""
     try:
-        pagination = StudySession.query.paginate(
-            page=page, 
-            per_page=per_page
-        )
+        pagination = StudySession.query.paginate(page=page, per_page=per_page)
         
-        return success_response(
-            data={
-                "study_sessions": [format_study_session(session) for session in pagination.items]
-            },
-            meta=pagination_meta(pagination)
-        )
+        data = {
+            "study_sessions": [{
+                "id": s.id,
+                "group_id": s.group_id,
+                "study_activity_id": s.study_activity_id,
+                "started_at": s.started_at.isoformat() + "Z",
+                "ended_at": s.ended_at.isoformat() + "Z" if s.ended_at else None,
+                "group_name": s.group.name if s.group else None,
+                "activity_name": s.activity.name if s.activity else None
+            } for s in pagination.items]
+        }
+        
+        return success_response(data=data, meta=pagination_meta(pagination))
     except Exception as e:
+        db.session.rollback()
         return error_response(
             message="Failed to fetch study sessions",
             error_code="FETCH_ERROR",
@@ -459,8 +439,26 @@ def get_study_sessions(page=1, per_page=20):
 
 @bp.route('/study-sessions/<int:id>', methods=['GET'])
 def get_study_session(id):
-    session = StudySession.query.get_or_404(id)
-    return jsonify(format_study_session(session))
+    """Get single study session details"""
+    try:
+        session = StudySession.query.get_or_404(id)
+        data = {
+            "id": session.id,
+            "group_id": session.group_id,
+            "study_activity_id": session.study_activity_id,
+            "started_at": session.started_at.isoformat() + "Z",
+            "ended_at": session.ended_at.isoformat() + "Z" if session.ended_at else None,
+            "group_name": session.group.name if session.group else None,
+            "activity_name": session.activity.name if session.activity else None
+        }
+        return success_response(data=data)
+    except Exception as e:
+        db.session.rollback()
+        return error_response(
+            message="Failed to fetch study session",
+            error_code="FETCH_ERROR",
+            status_code=500
+        )
 
 @bp.route('/study-sessions/<int:id>/words', methods=['GET'])
 @validate_pagination()
@@ -518,27 +516,44 @@ def get_group_study_sessions(id, page=1, per_page=20):  # Fixed parameter names
 
 @bp.route('/study-sessions/<int:id>/end', methods=['POST'])
 def end_study_session(id):
-    session = StudySession.query.get_or_404(id)
-    
-    if session.ended_at is not None:
-        return jsonify({
-            "error": "Session already ended"
-        }), 400
+    try:
+        session = StudySession.query.get_or_404(id)
         
-    session.ended_at = datetime.utcnow()
-    db.session.commit()
-    
-    return jsonify(format_study_session(session))
+        if session.ended_at is not None:
+            return error_response(
+                message="Session already ended",
+                error_code="INVALID_STATE",
+                status_code=400
+            )
+            
+        session.ended_at = datetime.now(UTC)
+        db.session.commit()
+        
+        return success_response(data=format_study_session(session))
+    except Exception as e:
+        db.session.rollback()
+        return error_response(
+            message="Failed to end session",
+            error_code="UPDATE_ERROR",
+            status_code=500
+        )
 
 # Helper function for formatting study sessions
 def format_study_session(session):
+    """Format study session data with review counts"""
+    # Use distinct count to avoid duplicates
     correct_count = WordReviewItem.query.filter_by(
         session_id=session.id, 
         is_correct=True
     ).count()
+    
     wrong_count = WordReviewItem.query.filter_by(
         session_id=session.id, 
         is_correct=False
+    ).count()
+    
+    total_count = WordReviewItem.query.filter_by(
+        session_id=session.id
     ).count()
     
     return {
@@ -547,7 +562,7 @@ def format_study_session(session):
         "group_name": session.group.name,
         "started_at": session.started_at.isoformat() + "Z",
         "ended_at": session.ended_at.isoformat() + "Z" if session.ended_at else None,
-        "number_of_review_items": correct_count + wrong_count,
+        "number_of_review_items": total_count,
         "number_of_correct_review_items": correct_count,
         "number_of_wrong_review_items": wrong_count
     }

@@ -20,36 +20,45 @@ class TestConfig(Config):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     WTF_CSRF_ENABLED = False
 
-@pytest.fixture
+@pytest.fixture(scope='function')
 def app():
-    """Create and configure a new app instance for each test."""
+    """Create test application"""
     app = create_app(TestConfig)
-    return app
+    ctx = app.app_context()
+    ctx.push()
+    
+    db.create_all()
+    
+    yield app
+    
+    db.session.remove()
+    db.drop_all()
+    ctx.pop()
+
+@pytest.fixture(scope='function')
+def client(app):
+    """Test client"""
+    return app.test_client()
 
 @pytest.fixture(scope='function')
 def session(app):
-    """Create a new database session for each test."""
-    with app.app_context():
-        # Create tables
-        db.create_all()
-        
-        # Create a new session
-        session = db.session.registry()
-        
-        yield session
-        
-        # Cleanup
-        session.close()
-        db.drop_all()
-
-@pytest.fixture
-def client(app):
-    """A test client for the app."""
-    return app.test_client()
+    """Database session"""
+    connection = db.engine.connect()
+    transaction = connection.begin()
+    
+    # Configure the session to use the transaction
+    session = db.session.begin_nested()
+    
+    yield db.session
+    
+    # Cleanup
+    session.close()
+    transaction.rollback()
+    connection.close()
 
 @pytest.fixture
 def sample_words(session):
-    """Create sample words."""
+    """Create sample words with proper initialization"""
     words = []
     for word_data in SAMPLE_WORDS:
         word = Word(
@@ -120,3 +129,16 @@ def sample_word_reviews(session, sample_words, sample_study_session, sample_grou
         reviews.append(review)
     session.commit()
     return reviews
+
+@pytest.fixture(scope='function')
+def sample_full_data(session, sample_words, sample_groups, sample_activities, sample_study_session):
+    """Create a complete set of sample data"""
+    # Link words to groups
+    sample_groups[0].words.extend(sample_words)
+    session.commit()
+    return {
+        'words': sample_words,
+        'groups': sample_groups,
+        'activities': sample_activities,
+        'session': sample_study_session
+    }

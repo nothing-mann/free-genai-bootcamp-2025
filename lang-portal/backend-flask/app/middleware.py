@@ -10,27 +10,36 @@ def validate_pagination(max_per_page=50):
         @wraps(f)
         def decorated_function(*args, **kwargs):
             try:
-                page = request.args.get('page', 1, type=int)
-                per_page = request.args.get('per_page', 20, type=int)
-                
+                # Get and convert pagination parameters
+                try:
+                    page = int(request.args.get('page', 1))
+                    per_page = int(request.args.get('per_page', 20))
+                except (TypeError, ValueError):
+                    return error_response(
+                        message="Invalid pagination parameters",
+                        error_code="VALIDATION_ERROR",
+                        status_code=400
+                    )
+
+                # Validate values
                 if page < 1:
                     return error_response(
                         message="Page number must be positive",
                         error_code="VALIDATION_ERROR",
                         status_code=400
                     )
-                
+
                 if per_page < 1 or per_page > max_per_page:
                     return error_response(
                         message=f"Items per page must be between 1 and {max_per_page}",
                         error_code="VALIDATION_ERROR",
                         status_code=400
                     )
-                
+
                 return f(*args, page=page, per_page=per_page, **kwargs)
-            except (ValueError, TypeError):
+            except Exception as e:
                 return error_response(
-                    message="Invalid pagination parameters",
+                    message=str(e),
                     error_code="VALIDATION_ERROR",
                     status_code=400
                 )
