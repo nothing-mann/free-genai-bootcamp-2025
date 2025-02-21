@@ -1,9 +1,11 @@
 import os
 import json
 import sqlite3
+from datetime import datetime, UTC, timedelta
 from invoke import task
-from app import create_app, db
-from app.models import Word, Group, StudyActivity, StudySession
+from app import create_app
+from app.models.base import db
+from app.models import Word, Group, StudyActivity, StudySession, WordReviewItem
 
 DB_PATH = "words.db"
 
@@ -33,74 +35,89 @@ def migrate(ctx):
     conn.close()
 
 @task
-def seed_db(ctx):
-    """Seed the database with initial data"""
+def seed_db(c):
+    """Seed database with sample data"""
     app = create_app()
-    
     with app.app_context():
         try:
-            print(f"Starting database seeding...")
-            print(f"Looking for seed files in: {app.config['SEEDS_DIR']}")
+            print("Starting database seeding...")
             
-            # First seed study activities
-            study_activities_file = os.path.join(app.config['SEEDS_DIR'], 'study_activities.json')
-            if os.path.exists(study_activities_file):
-                with open(study_activities_file) as f:
-                    print(f"Processing study activities...")
-                    activities_data = json.load(f)
-                    for activity in activities_data['activities']:
-                        study_activity = StudyActivity(
-                            name=activity['name'],
-                            description=activity['description'],
-                            instructions=activity['instructions'],
-                            thumbnail=activity['thumbnail']
-                        )
-                        db.session.add(study_activity)
-                    db.session.commit()
-                    print("Study activities seeded successfully")
-
-            # Then seed words and groups
-            for filename in sorted(os.listdir(app.config['SEEDS_DIR'])):
-                if not filename.endswith('.json') or filename == 'study_activities.json':
-                    continue
-                    
-                with open(os.path.join(app.config['SEEDS_DIR'], filename)) as f:
-                    print(f"\nProcessing seed file: {filename}")
-                    data = json.load(f)
-                    
-                    # Create group
-                    group = Group(
-                        name=data['group_name'],
-                        description=data['group_description']
-                    )
-                    db.session.add(group)
-                    db.session.flush()  # Get the group ID
-                    
-                    # Process words
-                    for word_data in data['words']:
-                        word = Word(
-                            nepali_word=word_data['nepali'],
-                            romanized_nepali_word=word_data['romanized_nepali'],
-                            english_word=word_data['english'],
-                            part_of_speech=word_data['part_of_speech']
-                        )
-                        db.session.add(word)
-                        group.words.append(word)
-                    
-                    db.session.commit()
-                    print(f"Processed {len(data['words'])} words for group: {group.name}")
+            # Create study activities
+            activities = [
+                StudyActivity(
+                    name="Flashcards",
+                    description="Practice with flashcards",
+                    instructions="Flip cards to learn words",
+                    thumbnail="flashcards.jpg"
+                ),
+                StudyActivity(
+                    name="Word Match",
+                    description="Match words with their meanings",
+                    instructions="Connect matching pairs",
+                    thumbnail="matching.jpg"
+                )
+            ]
             
-            # Print summary
-            word_count = Word.query.count()
-            group_count = Group.query.count()
-            activity_count = StudyActivity.query.count()
+            # Create groups
+            groups = [
+                Group(
+                    name="Basic Phrases",
+                    description="Essential everyday phrases"
+                ),
+                Group(
+                    name="Numbers",
+                    description="Counting and numbers"
+                )
+            ]
             
-            print(f"\nSeeding Summary:")
-            print(f"- Words created: {word_count}")
-            print(f"- Groups created: {group_count}")
-            print(f"- Activities created: {activity_count}")
+            # Create words with properly formatted part_of_speech
+            words = [
+                Word(
+                    nepali_word="नमस्ते",
+                    romanized_nepali_word="namaste",
+                    english_word="hello",
+                    part_of_speech=json.dumps(['greeting'])  # Convert list to JSON string
+                ),
+                Word(
+                    nepali_word="धन्यवाद",
+                    romanized_nepali_word="dhanyavaad",
+                    english_word="thank you",
+                    part_of_speech=json.dumps(['phrase'])    # Convert list to JSON string
+                )
+            ]
             
-            print("\nDatabase seeding completed successfully!")
+            # Add initial items
+            for item in [*activities, *groups, *words]:
+                db.session.add(item)
+            db.session.flush()
+            
+            # Create relationships
+            groups[0].words.extend(words)
+            
+            # Create study session
+            now = datetime.now(UTC)
+            session = StudySession(
+                group_id=groups[0].id,
+                study_activity_id=activities[0].id,
+                started_at=now - timedelta(hours=1),
+                ended_at=now
+            )
+            db.session.add(session)
+            db.session.flush()
+            
+            # Create word reviews
+            for word in words:
+                review = WordReviewItem(
+                    word_id=word.id,
+                    session_id=session.id,
+                    group_id=groups[0].id,
+                    is_correct=True,
+                    created_at=now
+                )
+                db.session.add(review)
+            
+            db.session.commit()
+            print("Database seeded successfully!")
             
         except Exception as e:
             db.session.rollback()
@@ -135,13 +152,22 @@ def clean(c):
 
 @task
 def reset_db(c):
-    """Reset the database"""
-    c.run('python -c "from app import db, create_app; app = create_app(); app.app_context().push(); db.drop_all(); db.create_all()"')
-
-@task
-def seed_db(c):
-    """Load sample data into database"""
-    c.run('python -c "from app import db, create_app; from tests.fixtures.test_data import SAMPLE_WORDS, SAMPLE_GROUPS, SAMPLE_ACTIVITIES; from app.models import Word, Group, StudyActivity; app = create_app(); app.app_context().push(); [db.session.add(Word(**w)) for w in SAMPLE_WORDS]; [db.session.add(Group(**g)) for g in SAMPLE_GROUPS]; [db.session.add(StudyActivity(**a)) for a in SAMPLE_ACTIVITIES]; db.session.commit()"')
+    """Reset the database - drops and recreates all tables"""
+    from app import create_app
+    from app.extensions import db
+    
+    app = create_app()
+    
+    with app.app_context():
+        try:
+            print("Dropping all tables...")
+            db.drop_all()
+            print("Creating all tables...")
+            db.create_all()
+            print("Database reset completed successfully!")
+        except Exception as e:
+            print(f"Error resetting database: {str(e)}")
+            raise
 
 @task
 def lint(c):

@@ -11,7 +11,7 @@ class TestBasicEndpoints:
         assert response.json['status'] == 'operational'
 
 class TestDashboardEndpoints:
-    """Test dashboard related endpoints"""
+    """Test dashboard related endpoints""" 
     def test_dashboard_overview(self, client):
         """Test dashboard overview"""
         response = client.get('/api/dashboard')
@@ -128,11 +128,31 @@ class TestStudyActivityEndpoints:
 
 class TestStudySessionEndpoints:
     """Test study session endpoints"""
-    def test_session_lifecycle(self, client, session, sample_study_session):
-        """Test study session lifecycle"""
+    def test_session_lifecycle(self, client, session, sample_study_session, sample_groups, sample_activities):
+        """Test study session retrieval"""
+        # Ensure relationships are set up
+        sample_study_session.group = sample_groups[0]
+        sample_study_session.activity = sample_activities[0]
+        session.commit()
+
+        # Test getting session details
         response = client.get(f'/api/study-sessions/{sample_study_session.id}')
         assert response.status_code == 200
-        assert response.json['id'] == sample_study_session.id
+        assert response.json['data']['id'] == sample_study_session.id
+        assert 'group_name' in response.json['data']
+        assert 'activity_name' in response.json['data']
+
+    def test_session_list(self, client, sample_study_session):
+        """Test session listing"""
+        response = client.get('/api/study-sessions')
+        print(f"Response status: {response.status_code}")  # Debug line
+        print(f"Response data: {response.data}")          # Debug line
+        print(f"Response text: {response.data.decode()}")
+        assert response.status_code == 200
+        response_data = response.json
+        assert 'data' in response_data
+        assert 'study_sessions' in response_data['data']
+        assert isinstance(response_data['data']['study_sessions'], list)
 
 class TestPaginationBehavior:
     """Test pagination across endpoints"""

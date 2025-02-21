@@ -8,7 +8,7 @@ class Config:
     # Database configuration
     DATABASE_NAME = 'words.db'
     DATABASE_PATH = os.path.join(BASE_DIR, DATABASE_NAME)
-    SQLALCHEMY_DATABASE_URI = f'sqlite:///{DATABASE_PATH}'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or f'sqlite:///{DATABASE_PATH}'
     
     # Ensure these directories exist
     MIGRATIONS_DIR = os.path.join(BASE_DIR, 'db', 'migrations')
@@ -35,3 +35,6 @@ class Config:
     
     PORT = 8080
     HOST = '0.0.0.0'
+    
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'dev'
+    JSON_SORT_KEYS = False

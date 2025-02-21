@@ -1,7 +1,9 @@
 from flask import Blueprint, jsonify, request, abort
 from app.models.word import Word
 from app.models.group import Group
-from app.models.study import StudyActivity, StudySession, WordReviewItem
+from app.models.study_activity import StudyActivity 
+from app.models.study_session import StudySession 
+from app.models.word_review import WordReviewItem
 from app.middleware import validate_pagination, validate_json_body
 from app.schemas import StudyActivityCreate, WordReviewCreate
 from app import db

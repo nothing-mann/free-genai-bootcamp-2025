@@ -103,16 +103,16 @@ def sample_activities(session):
     return activities
 
 @pytest.fixture
-def sample_study_session(session, sample_groups, sample_activities):
-    """Create a sample study session."""
-    session_obj = StudySession(
-        group_id=sample_groups[0].id,
-        study_activity_id=sample_activities[0].id,
-        started_at=datetime.now(UTC)
+def sample_study_session(session):  # Changed from db to session
+    """Create a sample study session for testing"""
+    study_session = StudySession(
+        score=85,
+        duration=300,  # 5 minutes
+        created_at=datetime.now(UTC)
     )
-    session.add(session_obj)
+    session.add(study_session)      # Changed from db.session to session
     session.commit()
-    return session_obj
+    return study_session
 
 @pytest.fixture
 def sample_word_reviews(session, sample_words, sample_study_session, sample_groups):

@@ -1,9 +1,8 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+from flask_migrate import Migrate
 from config import Config
-
-db = SQLAlchemy()
+from app.extensions import db
 
 def create_app(config_class=Config):
     """Create and configure the Flask application"""
@@ -12,18 +11,21 @@ def create_app(config_class=Config):
     
     # Initialize extensions
     db.init_app(app)
+    migrate = Migrate(app, db)  # Add migration support
     CORS(app)
     
     # Register blueprints
     with app.app_context():
         from app.routes.api import bp as api_bp
-        app.register_blueprint(api_bp)
+        from app.routes.study_sessions import bp as study_sessions_bp
         
-        # Register error handlers
-        from app.utils.error_handlers import error_handlers
-        app.register_blueprint(error_handlers)
+        app.register_blueprint(api_bp)
+        app.register_blueprint(study_sessions_bp)
         
         # Create database tables
-        db.create_all()
+        try:
+            db.create_all()
+        except Exception as e:
+            print(f"Error creating tables: {e}")
     
     return app
