@@ -12,6 +12,11 @@ class StudyActivity(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if not self.name or not self.description:
+            raise ValueError("Name and description are required")
+
     def to_dict(self):
         return {
             'id': self.id,

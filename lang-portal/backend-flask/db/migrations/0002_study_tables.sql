@@ -3,7 +3,9 @@ CREATE TABLE IF NOT EXISTS study_activities (
     name TEXT NOT NULL,
     description TEXT NOT NULL,
     instructions TEXT NOT NULL,
-    thumbnail TEXT NOT NULL
+    thumbnail TEXT NOT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME
 );
 
 CREATE TABLE IF NOT EXISTS study_sessions (
@@ -12,6 +14,8 @@ CREATE TABLE IF NOT EXISTS study_sessions (
     started_at DATETIME NOT NULL,
     ended_at DATETIME,
     study_activity_id INTEGER NOT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME,
     FOREIGN KEY (group_id) REFERENCES groups(id),
     FOREIGN KEY (study_activity_id) REFERENCES study_activities(id)
 );
@@ -23,6 +27,7 @@ CREATE TABLE IF NOT EXISTS word_review_items (
     group_id INTEGER NOT NULL,
     is_correct BOOLEAN NOT NULL,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME,
     FOREIGN KEY (word_id) REFERENCES words(id),
     FOREIGN KEY (session_id) REFERENCES study_sessions(id),
     FOREIGN KEY (group_id) REFERENCES groups(id)

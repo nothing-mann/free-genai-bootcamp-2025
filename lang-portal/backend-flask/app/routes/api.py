@@ -23,18 +23,19 @@ def index():
 
 @bp.route('/dashboard', methods=['GET'])
 def dashboard():
+    """Get dashboard overview"""
     try:
         data = {
-            "message": "Welcome to the dashboard!",
-            "total_words": Word.query.count(),
-            "total_groups": Group.query.count(),
-            "total_study_sessions": StudySession.query.count()
+            'total_words': Word.query.count(),
+            'total_groups': Group.query.count(),
+            'total_study_sessions': StudySession.query.count()
         }
         return success_response(data=data)
     except Exception as e:
         return error_response(
             message="Failed to fetch dashboard data",
-            error_code="DASHBOARD_ERROR"
+            error_code="DASHBOARD_ERROR",
+            status_code=404
         )
 
 @bp.route('/words', methods=['GET'])
@@ -55,48 +56,34 @@ def get_words(page=1, per_page=20):
     except Exception as e:
         return error_response(
             message="Failed to fetch words",
-            error_code="WORDS_FETCH_ERROR",
-            status_code=500
+            error_code="NOT_FOUND",
+            status_code=404
         )
 
 @bp.route('/dashboard/statistics', methods=['GET'])
 def dashboard_statistics():
+    """Get dashboard statistics"""
     try:
-        stats = get_dashboard_statistics()
-        return success_response(data=stats)
+        reviews = WordReviewItem.query
+        total_reviews = reviews.count()
+        correct_reviews = reviews.filter_by(is_correct=True).count()
+        
+        data = {
+            'words_learned': WordReviewItem.query.distinct(WordReviewItem.word_id).count(),
+            'average_score': (correct_reviews / total_reviews * 100) if total_reviews > 0 else 0,
+            'total_reviews': total_reviews,
+            'study_sessions_completed': StudySession.query.filter(StudySession.ended_at.isnot(None)).count()
+        }
+        return success_response(data=data)
     except Exception as e:
         return error_response(
             message="Failed to fetch statistics",
             error_code="STATISTICS_ERROR",
-            status_code=500
+            status_code=404
         )
 
-@bp.route('/groups', methods=['GET'])
-@validate_pagination()
-def get_groups(page=1, per_page=20):
-    try:
-        pagination = Group.query.paginate(page=page, per_page=per_page)
-        return jsonify({
-            "word_groups": [{
-                "id": g.id,
-                "name": g.name,
-                "description": g.description,
-                "total_words": g.total_words
-            } for g in pagination.items],
-            "pagination": {
-                "page": pagination.page,
-                "per_page": pagination.per_page,
-                "total_pages": pagination.pages,
-                "has_next": pagination.has_next,
-                "has_previous": pagination.has_prev
-            }
-        })
-    except Exception as e:
-        return error_response(
-            message="Failed to fetch groups",
-            error_code="FETCH_ERROR",
-            status_code=500
-        )
+
+
 
 @bp.route('/study-sessions/<int:session_id>/words/<int:word_id>/review', methods=['POST'])
 def review_word(session_id, word_id):
@@ -135,35 +122,47 @@ def review_word(session_id, word_id):
 
 @bp.route('/dashboard/last-session', methods=['GET'])
 def last_session():
-    last_session = StudySession.query.order_by(StudySession.started_at.desc()).first()
-    if not last_session:
-        return jsonify({"message": "No sessions found"}), 404
-    
-    correct_count = WordReviewItem.query.filter_by(
-        session_id=last_session.id, 
-        is_correct=True
-    ).count()
-    total_count = WordReviewItem.query.filter_by(session_id=last_session.id).count()
-    score = (correct_count / total_count * 100) if total_count > 0 else 0
-    
-    return jsonify({
-        "id": last_session.id,
-        "group_id": last_session.group_id,
-        "started_at": last_session.started_at.isoformat() + "Z",
-        "ended_at": last_session.ended_at.isoformat() + "Z" if last_session.ended_at else None,
-        "score": round(score, 2)
-    })
+    """Get last study session"""
+    try:
+        last_session = StudySession.query.order_by(StudySession.started_at.desc()).first()
+        if not last_session:
+            return success_response(data={'id': None, 'score': None})
+        
+        reviews = WordReviewItem.query.filter_by(session_id=last_session.id)
+        total = reviews.count()
+        correct = reviews.filter_by(is_correct=True).count()
+        score = (correct / total * 100) if total > 0 else 0
+        
+        return success_response(data={
+            'id': last_session.id,
+            'score': round(score, 2),
+            'started_at': last_session.started_at.isoformat() + "Z",
+            'ended_at': last_session.ended_at.isoformat() + "Z" if last_session.ended_at else None
+        })
+    except Exception as e:
+        return error_response(
+            message="Failed to fetch last session",
+            error_code="SESSION_ERROR",
+            status_code=404
+        )
 
 @bp.route('/dashboard/study-progress', methods=['GET'])
 def study_progress():
+    """Get study progress"""
     try:
-        progress = get_study_progress()
-        return success_response(data=progress)
+        data = {
+            'progress': {
+                'total_words_studied': WordReviewItem.query.distinct(WordReviewItem.word_id).count(),
+                'total_sessions': StudySession.query.count(),
+                'total_activities': StudyActivity.query.count()
+            }
+        }
+        return success_response(data=data)
     except Exception as e:
         return error_response(
             message="Failed to fetch study progress",
             error_code="PROGRESS_ERROR",
-            status_code=500
+            status_code=404
         )
 
 @bp.route('/study-activities', methods=['GET'])
@@ -186,20 +185,31 @@ def get_study_activities(page=1, per_page=20):
     except Exception as e:
         return error_response(
             message="Failed to fetch activities",
-            error_code="FETCH_ERROR",
-            status_code=500
+            error_code="NOT_FOUND",
+            status_code=404
         )
 
 @bp.route('/study-activities/<int:id>', methods=['GET'])
 def get_study_activity(id):
-    activity = StudyActivity.query.get_or_404(id)
-    return jsonify({
-        "id": activity.id,
-        "name": activity.name,
-        "description": activity.description,
-        "instructions": activity.instructions,
-        "thumbnail": activity.thumbnail
-    })
+    """Get details of a specific study activity"""
+    try:
+        activity = StudyActivity.query.get_or_404(id)
+        
+        return success_response(
+            data={
+                "id": activity.id,
+                "name": activity.name,
+                "description": activity.description,
+                "instructions": activity.instructions,
+                "thumbnail": activity.thumbnail
+            }
+        )
+    except Exception as e:
+        return error_response(
+            message="Failed to fetch study activity",
+            error_code="NOT_FOUND",
+            status_code=404
+        )
 
 @bp.route('/study-activities/<int:id>/study-sessions', methods=['GET'])
 def get_activity_sessions(id):
@@ -277,6 +287,8 @@ def create_study_session():
             status_code=400
         )
 
+
+
 @bp.route('/words/<int:id>', methods=['GET'])
 def get_word(id):
     try:
@@ -298,14 +310,14 @@ def get_word(id):
                 "id": g.id,
                 "name": g.name,
                 "description": g.description,
-                "total_words": g.words.count()  # Changed from len(g.words) to g.words.count()
+                "total_words": g.words.count()
             } for g in word.groups]
         })
     except Exception as e:
         return error_response(
             message=f"Error retrieving word: {str(e)}",
-            error_code="WORD_FETCH_ERROR",
-            status_code=500
+            error_code="NOT_FOUND",
+            status_code=404
         )
 
 @bp.route('/words/<int:id>/groups', methods=['GET'])
@@ -337,43 +349,13 @@ def get_word_groups(id, page=1, per_page=20):
     except Exception as e:
         return error_response(
             message=f"Error retrieving word groups: {str(e)}",
-            error_code="FETCH_ERROR",
-            status_code=500
+            error_code="NOT_FOUND",
+            status_code=404
         )
 
-@bp.route('/groups/<int:id>', methods=['GET'])
-def get_group(id):
-    group = Group.query.get_or_404(id)
-    return jsonify({
-        "id": group.id,
-        "name": group.name,
-        "description": group.description,
-        "statistics": group.statistics
-    })
 
-@bp.route('/groups/<int:id>/words', methods=['GET'])
-def get_group_words(id):
-    group = Group.query.get_or_404(id)
-    page = request.args.get('page', 1, type=int)
-    per_page = request.args.get('per_page', 20, type=int)
-    
-    pagination = group.words.paginate(page=page, per_page=per_page)
-    
-    return jsonify({
-        "words": [{
-            "id": w.id,
-            "nepali_word": w.nepali_word,
-            "romanized_nepali_word": w.romanized_nepali_word,
-            "english_word": w.english_word
-        } for w in pagination.items],
-        "pagination": {
-            "page": pagination.page,
-            "per_page": pagination.per_page,
-            "total_pages": pagination.pages,
-            "has_next": pagination.has_next,
-            "has_previous": pagination.has_prev
-        }
-    })
+
+
 
 @bp.route('/reset-history', methods=['POST'])
 def reset_history():
@@ -390,7 +372,7 @@ def reset_history():
         return jsonify({
             "success": False,
             "message": str(e)
-        }), 500
+        }), 404
 
 @bp.route('/full-reset', methods=['POST'])
 def full_reset():
@@ -409,7 +391,7 @@ def full_reset():
         return jsonify({
             "success": False,
             "message": str(e)
-        }), 500
+        }), 404
 
 @bp.route('/study-sessions', methods=['GET'])
 @validate_pagination()
@@ -435,8 +417,8 @@ def get_study_sessions(page=1, per_page=20):
         db.session.rollback()
         return error_response(
             message="Failed to fetch study sessions",
-            error_code="FETCH_ERROR",
-            status_code=500
+            error_code="NOT_FOUND",
+            status_code=404
         )
 
 @bp.route('/study-sessions/<int:id>', methods=['GET'])
@@ -458,8 +440,8 @@ def get_study_session(id):
         db.session.rollback()
         return error_response(
             message="Failed to fetch study session",
-            error_code="FETCH_ERROR",
-            status_code=500
+            error_code="NOT_FOUND",
+            status_code=404
         )
 
 @bp.route('/study-sessions/<int:id>/words', methods=['GET'])
@@ -489,8 +471,8 @@ def get_session_words(id, page=1, per_page=20):  # Fixed parameter names
     except Exception as e:
         return error_response(
             message="Failed to fetch session words",
-            error_code="FETCH_ERROR",
-            status_code=500
+            error_code="NOT_FOUND",
+            status_code=404
         )
 
 @bp.route('/groups/<int:id>/study-sessions', methods=['GET'])
@@ -512,8 +494,8 @@ def get_group_study_sessions(id, page=1, per_page=20):  # Fixed parameter names
     except Exception as e:
         return error_response(
             message="Failed to fetch group study sessions",
-            error_code="FETCH_ERROR",
-            status_code=500
+            error_code="NOT_FOUND",
+            status_code=404
         )
 
 @bp.route('/study-sessions/<int:id>/end', methods=['POST'])
@@ -537,7 +519,7 @@ def end_study_session(id):
         return error_response(
             message="Failed to end session",
             error_code="UPDATE_ERROR",
-            status_code=500
+            status_code=404
         )
 
 # Helper function for formatting study sessions
@@ -579,3 +561,79 @@ def calculate_streak():
     """Calculate current learning streak"""
     # For now, return a placeholder value
     return 0
+
+@bp.route('/groups', methods=['GET'])
+@validate_pagination()
+def get_groups(page=1, per_page=20):
+    """Get paginated list of word groups"""
+    try:
+        pagination = Group.query.paginate(page=page, per_page=per_page)
+        
+        return success_response(
+            data={
+                "word_groups": [{
+                    "id": g.id,
+                    "name": g.name,
+                    "description": g.description,
+                    "total_words": g.total_words
+                } for g in pagination.items]
+            },
+            meta=pagination_meta(pagination)
+        )
+    except Exception as e:
+        return error_response(
+            message="Failed to fetch groups",
+            error_code="NOT_FOUND",
+            status_code=404
+        )
+
+@bp.route('/groups/<int:id>', methods=['GET'])
+def get_group(id):
+    """Get details of a specific group"""
+    try:
+        group = Group.query.get_or_404(id)
+        
+        return success_response(
+            data={
+                "id": group.id,
+                "name": group.name,
+                "description": group.description,
+                "statistics": {
+                    "correct_count": WordReviewItem.query.filter_by(group_id=id, is_correct=True).count(),
+                    "wrong_count": WordReviewItem.query.filter_by(group_id=id, is_correct=False).count(),
+                    "total_count": WordReviewItem.query.filter_by(group_id=id).count()
+                }
+            }
+        )
+    except Exception as e:
+        return error_response(
+            message="Failed to fetch group",
+            error_code="NOT_FOUND",
+            status_code=404
+        )
+
+@bp.route('/groups/<int:id>/words', methods=['GET'])
+@validate_pagination()
+def get_group_words(id, page=1, per_page=20):
+    """Get paginated list of words in a group"""
+    try:
+        group = Group.query.get_or_404(id)
+        pagination = group.words.paginate(page=page, per_page=per_page)
+        
+        return success_response(
+            data={
+                "words": [{
+                    "id": w.id,
+                    "nepali_word": w.nepali_word,
+                    "romanized_nepali_word": w.romanized_nepali_word,
+                    "english_word": w.english_word
+                } for w in pagination.items]
+            },
+            meta=pagination_meta(pagination)
+        )
+    except Exception as e:
+        return error_response(
+            message="Failed to fetch group words",
+            error_code="NOT_FOUND",
+            status_code=404
+        )

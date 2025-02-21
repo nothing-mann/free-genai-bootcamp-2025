@@ -3,13 +3,17 @@ CREATE TABLE IF NOT EXISTS words (
     nepali_word TEXT NOT NULL,
     romanized_nepali_word TEXT NOT NULL,
     english_word TEXT NOT NULL,
-    part_of_speech TEXT NOT NULL
+    part_of_speech TEXT NOT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME
 );
 
 CREATE TABLE IF NOT EXISTS groups (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
-    description TEXT NOT NULL
+    description TEXT NOT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME
 );
 
 CREATE TABLE IF NOT EXISTS words_groups (

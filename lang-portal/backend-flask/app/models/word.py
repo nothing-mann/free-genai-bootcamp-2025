@@ -30,6 +30,8 @@ class Word(BaseModel):
         if 'part_of_speech' in kwargs and isinstance(kwargs['part_of_speech'], list):
             kwargs['part_of_speech'] = json.dumps(kwargs['part_of_speech'])
         super().__init__(**kwargs)
+        if not self.nepali_word or not self.english_word:
+            raise ValueError("Both Nepali and English words are required")
 
     def to_dict(self):
         return {

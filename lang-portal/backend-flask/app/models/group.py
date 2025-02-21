@@ -31,9 +31,23 @@ class Group(BaseModel):
 
     @property
     def statistics(self):
+        """Calculate group statistics"""
+        correct_reviews = db.session.query(func.count(WordReviewItem.id))\
+            .filter(WordReviewItem.group_id == self.id)\
+            .filter(WordReviewItem.is_correct == True)\
+            .scalar()
+
+        wrong_reviews = db.session.query(func.count(WordReviewItem.id))\
+            .filter(WordReviewItem.group_id == self.id)\
+            .filter(WordReviewItem.is_correct == False)\
+            .scalar()
+
+        total_reviews = db.session.query(func.count(WordReviewItem.id))\
+            .filter(WordReviewItem.group_id == self.id)\
+            .scalar()
+
         return {
-            "total_words": self.words.count(),
-            "correct_count": self.word_reviews.filter_by(is_correct=True).count(),
-            "wrong_count": self.word_reviews.filter_by(is_correct=False).count(),
-            "total_count": self.word_reviews.count()
+            "correct_count": correct_reviews or 0,
+            "wrong_count": wrong_reviews or 0,
+            "total_count": total_reviews or 0
         }

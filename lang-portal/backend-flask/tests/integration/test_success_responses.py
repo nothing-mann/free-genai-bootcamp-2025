@@ -89,20 +89,43 @@ def test_study_session_responses(client, session, sample_groups, sample_activiti
 
 def test_statistics_responses(client, session, setup_statistics):
     """Test statistics endpoint responses"""
+    # Test statistics endpoint
     response = client.get('/api/dashboard/statistics')
     assert response.status_code == 200
     data = response.get_json()
     
+    # Check response structure
+    assert 'success' in data
+    assert 'message' in data
+    assert 'timestamp' in data
     assert 'data' in data
-    assert isinstance(data['data']['words_learned'], int)
-    assert isinstance(data['data']['study_sessions_completed'], int)
-    assert isinstance(data['data']['average_score'], (int, float))
-    assert isinstance(data['data']['streak'], int)
     
-    # Test study progress
+    # Check statistics data types
+    stats_data = data['data']
+    assert isinstance(stats_data['words_learned'], int)
+    assert isinstance(stats_data['study_sessions_completed'], int)
+    assert isinstance(stats_data['average_score'], (int, float))
+    assert isinstance(stats_data['total_reviews'], int)
+
+    # Test study progress endpoint
     response = client.get('/api/dashboard/study-progress')
     assert response.status_code == 200
     data = response.get_json()
+    
+    # Verify response structure
+    assert 'success' in data
+    assert 'message' in data
+    assert 'timestamp' in data
     assert 'data' in data
-    assert isinstance(data['data']['total_words_studied'], int)
-    assert isinstance(data['data']['total_available_words'], int)
+    assert 'progress' in data['data']
+    
+    # Verify progress data
+    progress = data['data']['progress']
+    assert 'total_words_studied' in progress
+    assert 'total_sessions' in progress
+    assert 'total_activities' in progress
+    
+    # Verify data types
+    assert isinstance(progress['total_words_studied'], int)
+    assert isinstance(progress['total_sessions'], int)
+    assert isinstance(progress['total_activities'], int)

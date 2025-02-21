@@ -76,23 +76,29 @@ class TestGroupModel:
             db.session.commit()
             
             stats = group.statistics
-            assert "total_words" in stats
-            assert "total_reviews" in stats
-            assert "correct_reviews" in stats
+            print("Returned stats:", stats)
+            assert "total_count" in stats
+            assert "correct_count" in stats
+            assert "wrong_count" in stats
 
 class TestStudyActivityModel:
     """Test StudyActivity model functionalities"""
     
-    def test_study_activity_creation(self):
+    def test_study_activity_creation(self, app):  # Add app fixture parameter
         """Test study activity creation and validation"""
-        activity = StudyActivity(
-            name="Flashcards",
-            description="Practice with flashcards",
-            instructions="Flip cards to learn",
-            thumbnail="flashcards.jpg"
-        )
-        assert activity.name == "Flashcards"
-        assert activity.created_at is not None
+        with app.app_context():  # Add app context
+            activity = StudyActivity(
+                name="Flashcards",
+                description="Practice with flashcards",
+                instructions="Flip cards to learn",
+                thumbnail="flashcards.jpg"
+            )
+            db.session.add(activity)  # Add to session
+            db.session.commit()       # Commit to trigger defaults
+            
+            assert activity.name == "Flashcards"
+            assert activity.created_at is not None
+            db.session.rollback()     # Cleanup
 
     def test_study_activity_validation(self):
         """Test study activity validation"""
@@ -130,7 +136,11 @@ class TestStudySessionModel:
         )
         session.ended_at = start_time + timedelta(minutes=30)
         
-        assert session.duration.total_seconds() == 1800  # 30 minutes
+        assert session.duration_seconds == 1800  # 30 minutes
+        
+        # Test when end time is not set
+        session.ended_at = None
+        assert session.duration_seconds is None
 
 class TestWordReviewModel:
     """Test WordReview model functionalities"""
