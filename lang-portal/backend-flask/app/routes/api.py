@@ -13,6 +13,7 @@ from app.utils.statistics import get_study_progress, get_dashboard_statistics
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
+
 @bp.route('/', methods=['GET'])
 def index():
     return jsonify({
@@ -69,7 +70,7 @@ def dashboard_statistics():
         correct_reviews = reviews.filter_by(is_correct=True).count()
         
         data = {
-            'words_learned': WordReviewItem.query.distinct(WordReviewItem.word_id).count(),
+            'words_learned': db.session.query(WordReviewItem.word_id).group_by(WordReviewItem.word_id).count(),
             'average_score': (correct_reviews / total_reviews * 100) if total_reviews > 0 else 0,
             'total_reviews': total_reviews,
             'study_sessions_completed': StudySession.query.filter(StudySession.ended_at.isnot(None)).count()
@@ -81,9 +82,6 @@ def dashboard_statistics():
             error_code="STATISTICS_ERROR",
             status_code=404
         )
-
-
-
 
 @bp.route('/study-sessions/<int:session_id>/words/<int:word_id>/review', methods=['POST'])
 def review_word(session_id, word_id):
@@ -152,7 +150,7 @@ def study_progress():
     try:
         data = {
             'progress': {
-                'total_words_studied': WordReviewItem.query.distinct(WordReviewItem.word_id).count(),
+                'total_words_studied': db.session.query(WordReviewItem.word_id).group_by(WordReviewItem.word_id).count(),
                 'total_sessions': StudySession.query.count(),
                 'total_activities': StudyActivity.query.count()
             }
@@ -193,7 +191,7 @@ def get_study_activities(page=1, per_page=20):
 def get_study_activity(id):
     """Get details of a specific study activity"""
     try:
-        activity = StudyActivity.query.get_or_404(id)
+        activity = db.session.get(StudyActivity, id)
         
         return success_response(
             data={
@@ -253,8 +251,8 @@ def create_study_session():
             )
         
         # Verify the group and activity exist
-        group = Group.query.get(group_id)
-        activity = StudyActivity.query.get(study_activity_id)
+        group = db.session.get(Group, group_id)
+        activity = db.session.get(StudyActivity, study_activity_id)
         
         if not group or not activity:
             return error_response(
@@ -292,7 +290,7 @@ def create_study_session():
 @bp.route('/words/<int:id>', methods=['GET'])
 def get_word(id):
     try:
-        word = Word.query.get(id)
+        word = db.session.get(Word, id)
         if not word:
             return error_response(
                 message=f"Word with id {id} not found",
@@ -325,7 +323,7 @@ def get_word(id):
 def get_word_groups(id, page=1, per_page=20):
     """Get groups associated with a word"""
     try:
-        word = Word.query.get(id)
+        word = db.session.get(Word, id)
         if not word:
             return error_response(
                 message=f"Word with id {id} not found",
@@ -425,15 +423,15 @@ def get_study_sessions(page=1, per_page=20):
 def get_study_session(id):
     """Get single study session details"""
     try:
-        session = StudySession.query.get_or_404(id)
+        session_obj = db.session.get(StudySession, id)
         data = {
-            "id": session.id,
-            "group_id": session.group_id,
-            "study_activity_id": session.study_activity_id,
-            "started_at": session.started_at.isoformat() + "Z",
-            "ended_at": session.ended_at.isoformat() + "Z" if session.ended_at else None,
-            "group_name": session.group.name if session.group else None,
-            "activity_name": session.activity.name if session.activity else None
+            "id": session_obj.id,
+            "group_id": session_obj.group_id,
+            "study_activity_id": session_obj.study_activity_id,
+            "started_at": session_obj.started_at.isoformat() + "Z",
+            "ended_at": session_obj.ended_at.isoformat() + "Z" if session_obj.ended_at else None,
+            "group_name": session_obj.group.name if session_obj.group else None,
+            "activity_name": session_obj.activity.name if session_obj.activity else None
         }
         return success_response(data=data)
     except Exception as e:
@@ -479,7 +477,7 @@ def get_session_words(id, page=1, per_page=20):  # Fixed parameter names
 @validate_pagination()
 def get_group_study_sessions(id, page=1, per_page=20):  # Fixed parameter names
     try:
-        group = Group.query.get_or_404(id)
+        group = db.session.get(Group, id)
         
         pagination = StudySession.query\
             .filter_by(group_id=id)\
@@ -501,7 +499,7 @@ def get_group_study_sessions(id, page=1, per_page=20):  # Fixed parameter names
 @bp.route('/study-sessions/<int:id>/end', methods=['POST'])
 def end_study_session(id):
     try:
-        session = StudySession.query.get_or_404(id)
+        session = db.session.get(StudySession, id)
         
         if session.ended_at is not None:
             return error_response(
@@ -591,7 +589,7 @@ def get_groups(page=1, per_page=20):
 def get_group(id):
     """Get details of a specific group"""
     try:
-        group = Group.query.get_or_404(id)
+        group = db.session.get(Group, id)
         
         return success_response(
             data={
@@ -617,7 +615,7 @@ def get_group(id):
 def get_group_words(id, page=1, per_page=20):
     """Get paginated list of words in a group"""
     try:
-        group = Group.query.get_or_404(id)
+        group = db.session.get(Group, id)
         pagination = group.words.paginate(page=page, per_page=per_page)
         
         return success_response(

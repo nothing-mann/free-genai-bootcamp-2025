@@ -1,4 +1,5 @@
 from datetime import datetime, UTC
+from sqlalchemy import text, DateTime
 from app.extensions import db
 from app.models.base import BaseModel
 
@@ -7,8 +8,12 @@ class StudySession(BaseModel):
 
     group_id = db.Column(db.Integer, db.ForeignKey('groups.id'), nullable=True)
     study_activity_id = db.Column(db.Integer, db.ForeignKey('study_activities.id'), nullable=True)
-    started_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    ended_at = db.Column(db.DateTime)
+    started_at = db.Column(
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=text('CURRENT_TIMESTAMP')
+    )
+    ended_at = db.Column(DateTime(timezone=True))
 
     # Relationships
     group = db.relationship('Group', backref='study_sessions')
