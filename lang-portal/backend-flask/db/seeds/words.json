@@ -1,0 +1,320 @@
+[
+  {
+    "nepali_word": "नमस्ते",
+    "romanized_nepali_word": "namaste",
+    "english_word": "hello",
+    "part_of_speech": "[\"greeting\"]"
+  },
+  {
+    "nepali_word": "धन्यवाद",
+    "romanized_nepali_word": "dhanyavaad",
+    "english_word": "thank you",
+    "part_of_speech": "[\"phrase\"]"
+  },
+  {
+    "nepali_word": "माफ गर्नुहोस्",
+    "romanized_nepali_word": "maaf garnuhos",
+    "english_word": "excuse me/sorry",
+    "part_of_speech": "[\"phrase\"]"
+  },
+  {
+    "nepali_word": "बुवा",
+    "romanized_nepali_word": "buwa",
+    "english_word": "father",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "आमा",
+    "romanized_nepali_word": "aama",
+    "english_word": "mother",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "दाइ",
+    "romanized_nepali_word": "dai",
+    "english_word": "elder brother",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "दिदी",
+    "romanized_nepali_word": "didi",
+    "english_word": "elder sister",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "एक",
+    "romanized_nepali_word": "ek",
+    "english_word": "one",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "दुई",
+    "romanized_nepali_word": "dui",
+    "english_word": "two",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "तिन",
+    "romanized_nepali_word": "tin",
+    "english_word": "three",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "चार",
+    "romanized_nepali_word": "char",
+    "english_word": "four",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "पाँच",
+    "romanized_nepali_word": "panch",
+    "english_word": "five",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "छ",
+    "romanized_nepali_word": "chha",
+    "english_word": "six",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "सात",
+    "romanized_nepali_word": "saat",
+    "english_word": "seven",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "आठ",
+    "romanized_nepali_word": "aath",
+    "english_word": "eight",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "नौ",
+    "romanized_nepali_word": "nau",
+    "english_word": "nine",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "दश",
+    "romanized_nepali_word": "das",
+    "english_word": "ten",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "एघार",
+    "romanized_nepali_word": "eghaara",
+    "english_word": "eleven",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "बाह्र",
+    "romanized_nepali_word": "bahra",
+    "english_word": "twelve",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "तेह्र",
+    "romanized_nepali_word": "tehra",
+    "english_word": "thirteen",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "चौध",
+    "romanized_nepali_word": "chaudha",
+    "english_word": "fourteen",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "पन्ध्र",
+    "romanized_nepali_word": "pandhra",
+    "english_word": "fifteen",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "सोह्र",
+    "romanized_nepali_word": "sohra",
+    "english_word": "sixteen",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "सत्र",
+    "romanized_nepali_word": "satra",
+    "english_word": "seventeen",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "अठार",
+    "romanized_nepali_word": "athara",
+    "english_word": "eighteen",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "उन्नाइस",
+    "romanized_nepali_word": "unnaais",
+    "english_word": "nineteen",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "बीस",
+    "romanized_nepali_word": "bis",
+    "english_word": "twenty",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "खाना",
+    "romanized_nepali_word": "khana",
+    "english_word": "food",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "पानी",
+    "romanized_nepali_word": "paani",
+    "english_word": "water",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "रातो",
+    "romanized_nepali_word": "rato",
+    "english_word": "red",
+    "part_of_speech": "[\"adjective\"]"
+  },
+  {
+    "nepali_word": "नीलो",
+    "romanized_nepali_word": "nilo",
+    "english_word": "blue",
+    "part_of_speech": "[\"adjective\"]"
+  },
+  {
+    "nepali_word": "हरियो",
+    "romanized_nepali_word": "hariyo",
+    "english_word": "green",
+    "part_of_speech": "[\"adjective\"]"
+  },
+  {
+    "nepali_word": "खान्छु",
+    "romanized_nepali_word": "khanchu",
+    "english_word": "eat",
+    "part_of_speech": "[\"verb\"]"
+  },
+  {
+    "nepali_word": "जान्छु",
+    "romanized_nepali_word": "janchu",
+    "english_word": "go",
+    "part_of_speech": "[\"verb\"]"
+  },
+  {
+    "nepali_word": "आइतबार",
+    "romanized_nepali_word": "aaitabar",
+    "english_word": "Sunday",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "सोमबार",
+    "romanized_nepali_word": "sombar",
+    "english_word": "Monday",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "मंगलबार",
+    "romanized_nepali_word": "mangalbar",
+    "english_word": "Tuesday",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "बुधबार",
+    "romanized_nepali_word": "budhabar",
+    "english_word": "Wednesday",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "बिहीबार",
+    "romanized_nepali_word": "bihibar",
+    "english_word": "Thursday",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "शुक्रबार",
+    "romanized_nepali_word": "sukrabar",
+    "english_word": "Friday",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "शनिबार",
+    "romanized_nepali_word": "sanibar",
+    "english_word": "Saturday",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "बैशाख",
+    "romanized_nepali_word": "baisakh",
+    "english_word": "April-May",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "जेठ",
+    "romanized_nepali_word": "jeth",
+    "english_word": "May-June",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "असार",
+    "romanized_nepali_word": "asar",
+    "english_word": "June-July",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "श्रावण",
+    "romanized_nepali_word": "shrawan",
+    "english_word": "July-August",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "भदौ",
+    "romanized_nepali_word": "bhadau",
+    "english_word": "August-September",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "आश्विन",
+    "romanized_nepali_word": "ashwin",
+    "english_word": "September-October",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "कार्तिक",
+    "romanized_nepali_word": "kartik",
+    "english_word": "October-November",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "मंसिर",
+    "romanized_nepali_word": "mangsir",
+    "english_word": "November-December",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "पुष",
+    "romanized_nepali_word": "push",
+    "english_word": "December-January",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "माघ",
+    "romanized_nepali_word": "magh",
+    "english_word": "January-February",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "फागुन",
+    "romanized_nepali_word": "fagun",
+    "english_word": "February-March",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "चैत्र",
+    "romanized_nepali_word": "chaitra",
+    "english_word": "March-April",
+    "part_of_speech": "[\"noun\"]"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Basic Greetings",
+    "description": "Essential greetings and pleasantries"
+  },
+  {
+    "name": "Family Members",
+    "description": "Words for family relationships"
+  },
+  {
+    "name": "Numbers 1-20",
+    "description": "Basic counting and numbers"
+  },
+  {
+    "name": "Numbers 21-100",
+    "description": "Advanced numbers and counting"
+  },
+  {
+    "name": "Basic Food Items",
+    "description": "Common food and drink vocabulary"
+  },
+  {
+    "name": "Colors",
+    "description": "Basic color words"
+  },
+  {
+    "name": "Days and Months",
+    "description": "Calendar and time-related words"
+  },
+  {
+    "name": "Common Verbs",
+    "description": "Essential action words"
+  },
+  {
+    "name": "Weather Terms",
+    "description": "Weather and climate vocabulary"
+  },
+  {
+    "name": "Body Parts",
+    "description": "Human body vocabulary"
+  }
+]

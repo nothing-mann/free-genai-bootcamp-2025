@@ -36,85 +36,73 @@ def migrate(ctx):
 
 @task
 def seed_db(c):
-    """Seed database with sample data"""
+    """Seed database with sample data from seed files"""
     app = create_app()
     with app.app_context():
         try:
             print("Starting database seeding...")
             
+            # Load seed data from JSON files
+            seeds_dir = "db/seeds"
+            
+            with open(os.path.join(seeds_dir, 'activities.json')) as f:
+                activities_data = json.load(f)
+            with open(os.path.join(seeds_dir, 'groups.json')) as f:
+                groups_data = json.load(f)
+            with open(os.path.join(seeds_dir, 'words.json')) as f:
+                words_data = json.load(f)
+            
             # Create study activities
-            activities = [
-                StudyActivity(
-                    name="Flashcards",
-                    description="Practice with flashcards",
-                    instructions="Flip cards to learn words",
-                    thumbnail="flashcards.jpg"
-                ),
-                StudyActivity(
-                    name="Word Match",
-                    description="Match words with their meanings",
-                    instructions="Connect matching pairs",
-                    thumbnail="matching.jpg"
-                )
-            ]
+            activities = [StudyActivity(**data) for data in activities_data]
             
             # Create groups
-            groups = [
-                Group(
-                    name="Basic Phrases",
-                    description="Essential everyday phrases"
-                ),
-                Group(
-                    name="Numbers",
-                    description="Counting and numbers"
-                )
-            ]
+            groups = [Group(**data) for data in groups_data]
             
-            # Create words with properly formatted part_of_speech
-            words = [
-                Word(
-                    nepali_word="नमस्ते",
-                    romanized_nepali_word="namaste",
-                    english_word="hello",
-                    part_of_speech=json.dumps(['greeting'])  # Convert list to JSON string
-                ),
-                Word(
-                    nepali_word="धन्यवाद",
-                    romanized_nepali_word="dhanyavaad",
-                    english_word="thank you",
-                    part_of_speech=json.dumps(['phrase'])    # Convert list to JSON string
-                )
-            ]
+            # Create words
+            words = [Word(**data) for data in words_data]
             
             # Add initial items
             for item in [*activities, *groups, *words]:
                 db.session.add(item)
             db.session.flush()
             
-            # Create relationships
-            groups[0].words.extend(words)
+            # Create relationships from words_groups.json
+            with open(os.path.join(seeds_dir, 'words_groups.json')) as f:
+                words_groups_data = json.load(f)
+                
+            for relation in words_groups_data:
+                word = next(w for w in words if w.nepali_word == relation['nepali_word'])
+                group = next(g for g in groups if g.name == relation['group_name'])
+                group.words.append(word)
             
-            # Create study session
-            now = datetime.now(UTC)
-            session = StudySession(
-                group_id=groups[0].id,
-                study_activity_id=activities[0].id,
-                started_at=now - timedelta(hours=1),
-                ended_at=now
-            )
-            db.session.add(session)
-            db.session.flush()
+            # Create study sessions from sessions.json
+            with open(os.path.join(seeds_dir, 'sessions.json')) as f:
+                sessions_data = json.load(f)
             
-            # Create word reviews
-            for word in words:
-                review = WordReviewItem(
-                    word_id=word.id,
-                    session_id=session.id,
-                    group_id=groups[0].id,
-                    is_correct=True,
-                    created_at=now
+            for session_data in sessions_data:
+                group = next(g for g in groups if g.name == session_data['group_name'])
+                activity = next(a for a in activities if a.name == session_data['activity_name'])
+                
+                session = StudySession(
+                    group_id=group.id,
+                    study_activity_id=activity.id,
+                    started_at=datetime.fromisoformat(session_data['started_at']),
+                    ended_at=datetime.fromisoformat(session_data['ended_at'])
                 )
-                db.session.add(review)
+                db.session.add(session)
+                db.session.flush()
+                
+                # Create word reviews
+                for review_data in session_data['reviews']:
+                    word = next(w for w in words if w.nepali_word == review_data['nepali_word'])
+                    review = WordReviewItem(
+                        word_id=word.id,
+                        session_id=session.id,
+                        group_id=group.id,
+                        is_correct=review_data['is_correct'],
+                        created_at=datetime.fromisoformat(review_data['created_at'])
+                    )
+                    db.session.add(review)
             
             db.session.commit()
             print("Database seeded successfully!")
