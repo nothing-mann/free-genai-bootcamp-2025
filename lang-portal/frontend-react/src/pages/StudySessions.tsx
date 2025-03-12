@@ -84,7 +84,7 @@ const StudySessions = () => {
                   <td>
                     <Link 
                       to={`/study-sessions/${session.id}`} 
-                      className="btn btn-sm btn-outline btn-primary"
+                      className="btn btn-sm btn-outline"
                     >
                       View
                     </Link>

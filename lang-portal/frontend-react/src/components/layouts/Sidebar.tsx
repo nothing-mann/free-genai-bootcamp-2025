@@ -16,17 +16,34 @@ const Sidebar = () => {
   return (
     <div className="drawer-side z-20">
       <label htmlFor="drawer-toggle" aria-label="close sidebar" className="drawer-overlay"></label>
-      <div className="menu p-4 w-72 min-h-full bg-base-200 text-base-content">
-        <div className="flex items-center px-4 py-6">
-          <h1 className="text-2xl font-bold">{t('app.title')}</h1>
+      <div className="menu p-4 w-72 min-h-full bg-base-200 text-base-content bg-nepal-lokta">
+        <div className="flex items-center justify-between px-4 py-6 mb-4 border-b border-nepal-red/20">
+          <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-nepal-red to-nepal-blue">{t('app.title')}</h1>
+          <div className="w-10 h-10 flex items-center justify-center">
+            <div className="w-8 h-8 temple-container flex items-center justify-center">
+              <span className="text-nepal-red">🇳🇵</span>
+            </div>
+          </div>
         </div>
-        <ul className="mt-4 space-y-1">
+        
+        {/* Prayer flags inspired divider */}
+        <div className="prayer-flags mt-2 mb-6">
+          <div className="prayer-flag prayer-flag-blue"></div>
+          <div className="prayer-flag prayer-flag-white"></div>
+          <div className="prayer-flag prayer-flag-red"></div>
+          <div className="prayer-flag prayer-flag-green"></div>
+          <div className="prayer-flag prayer-flag-yellow"></div>
+        </div>
+        
+        <ul className="space-y-1">
           {navItems.map((item) => (
             <li key={item.path}>
               <NavLink
                 to={item.path}
                 className={({ isActive }) => 
-                  isActive ? 'active font-medium bg-primary text-primary-content' : 'font-normal'
+                  isActive 
+                    ? 'active font-medium bg-nepal-red text-white flex items-center gap-3 px-4 py-2 rounded-md' 
+                    : 'font-normal flex items-center gap-3 px-4 py-2 hover:bg-nepal-red/10 rounded-md transition-colors duration-200'
                 }
               >
                 <IconForNav icon={item.icon} />
@@ -35,12 +52,15 @@ const Sidebar = () => {
             </li>
           ))}
         </ul>
+        
+        {/* Removed the language stats progress bar section that was here */}
+        
       </div>
     </div>
   );
 };
 
-// Helper component to render icons
+// Keep the existing IconForNav component
 const IconForNav = ({ icon }: { icon: string }) => {
   switch (icon) {
     case 'dashboard':

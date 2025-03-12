@@ -81,6 +81,13 @@ const Dashboard = () => {
   const progress = progressData?.data?.progress;
   const lastSession = lastSessionData?.data;
 
+  // Determine color class based on average score
+  const getScoreColorClass = (score: number): string => {
+    if (score >= 80) return 'text-nepal-leaf';
+    if (score >= 50) return 'text-nepal-accent';
+    return 'text-primary';
+  };
+
   return (
     <div>
       <PageHeader title={t('dashboard.title')} />
@@ -91,7 +98,7 @@ const Dashboard = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="stat">
             <div className="stat-title">{t('dashboard.statistics.successRate')}</div>
-            <div className="stat-value text-primary">
+            <div className={`stat-value ${getScoreColorClass(statistics?.average_score ?? 0)}`}>
               {statistics?.average_score ? `${statistics.average_score.toFixed(1)}%` : 'N/A'}
             </div>
           </div>
@@ -173,7 +180,7 @@ const Dashboard = () => {
             <div className="flex flex-col md:items-end mt-4 md:mt-0">
               <Link 
                 to={`/study-sessions/${lastSession.id}`}
-                className="btn btn-outline btn-primary"
+                className="btn btn-outline"
               >
                 View Details
               </Link>
@@ -184,7 +191,7 @@ const Dashboard = () => {
       
       {/* Call to Action */}
       <div className="flex justify-center mt-8">
-        <Link to="/study-activities" className="btn btn-primary btn-lg">
+        <Link to="/study-activities" className="btn btn-primary">
           {t('dashboard.startStudy')}
         </Link>
       </div>

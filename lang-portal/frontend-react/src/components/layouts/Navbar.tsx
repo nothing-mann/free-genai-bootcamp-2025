@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import { useTheme } from '../../contexts/ThemeContext';
 import ThemeToggle from '../common/ThemeToggle';
 import LanguageSelector from '../common/LanguageSelector';
 
@@ -7,7 +6,7 @@ const Navbar = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="navbar bg-base-100 border-b border-base-300">
+    <div className="navbar bg-base-100 border-b border-nepal-red/10">
       <div className="flex-none lg:hidden">
         <label 
           htmlFor="drawer-toggle" 
@@ -20,8 +19,16 @@ const Navbar = () => {
         </label>
       </div>
       <div className="flex-1">
-        <span className="lg:hidden text-xl font-bold">{t('app.title')}</span>
+        <span className="lg:hidden text-xl font-bold text-nepal-red">{t('app.title')}</span>
       </div>
+      
+      {/* Level badge remains */}
+      <div className="flex-none">
+        <div className="badge-nepal mr-2">
+          Beginner
+        </div>
+      </div>
+      
       <div className="flex-none gap-2">
         <ThemeToggle />
         <LanguageSelector />
