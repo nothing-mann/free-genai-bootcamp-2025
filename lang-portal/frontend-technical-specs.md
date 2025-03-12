@@ -1,4 +1,60 @@
 ## Frontend Technical Spec
+### Business Goal
+A language learning school wants to build a prototype of a learning portal which will act as three things:
+
+* Inventory of possible vocabulary that can be learned
+* Act as a Learning record store (LRS), providing correct and wrong scores on practiced vocabulary
+* A unified launchpad to launch different learning apps
+
+### Technical Stack
+* Framework: React 18 with TypeScript
+* Build Tool: Vite
+* State Management: React Query for server state, Zustand for UI state
+* Routing: React Router v6
+* Styling: Tailwind CSS with DaisyUI components
+* HTTP Client: Axios
+* Form Handling: React Hook Form with Zod validation
+* Data Visualization: Recharts for progress graphs and statistics
+* Date/Time: Day.js for date formatting and manipulation
+Internationalization: i18next for multi-language support (EN/NP)
+* Testing: Vitest and React Testing Library
+
+### Directory Structure
+src/
+├── components/           # Reusable UI components
+│   ├── common/          # Generic components (buttons, cards, etc.)
+│   ├── dashboard/       # Dashboard-specific components
+│   ├── words/           # Word-related components
+│   ├── groups/          # Group-related components
+│   └── study/           # Study session components
+├── pages/               # Page components for each route
+├── hooks/               # Custom React hooks
+├── services/            # API service modules
+├── utils/               # Helper functions and utilities
+├── types/               # TypeScript type definitions
+├── store/               # Zustand store definitions
+├── constants/           # Application constants
+├── styles/              # Global styles and Tailwind config
+├── assets/              # Static assets (images, icons)
+├── i18n/                # Internationalization resources
+├── App.tsx              # Main App component
+├── main.tsx             # Application entry point
+└── routes.tsx           # Route definitions
+
+### Development Practices
+1. Responsive design for mobile, tablet, and desktop views
+2. Accessible UI components following WCAG guidelines
+3. Component-driven development with Storybook documentation
+4. Progressive enhancement for better user experience
+5. Theme support for light and dark modes
+6. Performance optimization with code splitting and lazy loading
+
+## Backend Availability
+**NOTE** All the backend code is available and working in the @backend-flask/ directory.
+
+### Browser Support
+* Modern evergreen browsers (Chrome, Firefox, Safari, Edge)
+* Mobile browsers on iOS and Android devices
 
 ## Pages
 ### Dashboard `/dashboard`

@@ -1,0 +1,119 @@
+{
+  "app": {
+    "title": "Language Learning Portal"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "studyActivities": "Study Activities",
+    "words": "Words",
+    "groups": "Groups",
+    "studySessions": "Study Sessions",
+    "settings": "Settings"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "statistics": {
+      "title": "Statistics",
+      "successRate": "Success Rate",
+      "studySessions": "Study Sessions",
+      "activeGroups": "Active Groups",
+      "studyStreak": "Study Streak"
+    },
+    "studyProgress": {
+      "title": "Study Progress",
+      "wordsStudied": "Words Studied",
+      "timeSpent": "Time Spent",
+      "masteryProgress": "Mastery Progress"
+    },
+    "lastSession": {
+      "title": "Last Study Session",
+      "totalWords": "Total Words",
+      "correctWords": "Correct Words",
+      "wrongWords": "Wrong Words",
+      "viewGroup": "View Group"
+    },
+    "startStudy": "Start Studying"
+  },
+  "words": {
+    "title": "Words",
+    "details": "Word Details",
+    "nepaliWord": "Nepali Word",
+    "romanizedWord": "Romanized",
+    "englishWord": "English Word",
+    "partOfSpeech": "Part of Speech",
+    "statistics": "Study Statistics",
+    "correct": "Correct",
+    "wrong": "Wrong",
+    "groups": "Word Groups",
+    "noGroups": "This word is not in any group"
+  },
+  "groups": {
+    "title": "Word Groups",
+    "details": "Group Details",
+    "name": "Group Name",
+    "description": "Description",
+    "createdAt": "Created At",
+    "statistics": "Group Statistics",
+    "words": "Words in This Group",
+    "studySessions": "Recent Study Sessions",
+    "noWords": "No words in this group",
+    "noSessions": "No study sessions for this group"
+  },
+  "studyActivities": {
+    "title": "Study Activities",
+    "details": "Study Activity Details",
+    "launch": "Launch Activity",
+    "view": "View Details",
+    "pastSessions": "Past Study Sessions",
+    "selectGroup": "Select Word Group",
+    "launchNow": "Launch Now"
+  },
+  "studySessions": {
+    "title": "Study Sessions",
+    "details": "Study Session Details",
+    "activity": "Activity",
+    "group": "Group",
+    "date": "Date",
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "duration": "Duration",
+    "items": "Items",
+    "score": "Score",
+    "wordReviewItems": "Word Review Items",
+    "result": "Result",
+    "time": "Time"
+  },
+  "settings": {
+    "title": "Settings",
+    "theme": "Theme",
+    "language": "Language",
+    "resetHistory": "Reset History",
+    "fullReset": "Full Reset",
+    "confirmReset": "Are you sure? This action cannot be undone.",
+    "resetHistoryDescription": "This will delete all study sessions and word review items.",
+    "fullResetDescription": "This will reset all data including words and groups to the initial seed data."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "noData": "No data available",
+    "pagination": {
+      "prev": "Previous",
+      "next": "Next",
+      "page": "Page"
+    },
+    "buttons": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm"
+    }
+  },
+  "errors": {
+    "notFound": "Page Not Found",
+    "notFoundMessage": "The page you are looking for doesn't exist or has been moved.",
+    "backToDashboard": "Back to Dashboard",
+    "serverError": "Server Error"
+  },
+  "days": "days"
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Match Activity</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-8">
+            <h1 class="text-3xl font-bold text-center text-blue-600">Word Match</h1>
+            <p class="text-center text-gray-600" id="group-name">Loading group...</p>
+            <div class="flex justify-center mt-4">
+                <div class="bg-white rounded-lg shadow px-4 py-2 mr-4">
+                    <span class="font-bold">Time:</span> <span id="timer">00:00</span>
+                </div>
+                <div class="bg-white rounded-lg shadow px-4 py-2">
+                    <span class="font-bold">Pairs:</span> <span id="pairs-matched">0</span>/<span id="total-pairs">0</span>
+                </div>
+            </div>
+        </header>
+        
+        <div class="max-w-4xl mx-auto">
+            <div id="game-board" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Cards will be generated here -->
+            </div>
+            
+            <div class="mt-8 text-center hidden" id="results-container">
+                <h2 class="text-2xl font-bold mb-4">Activity Complete!</h2>
+                <div class="flex justify-center items-center mb-4">
+                    <div class="w-32 h-32 rounded-full flex items-center justify-center">
+                        <div class="text-4xl font-bold" id="score-display">0%</div>
+                    </div>
+                </div>
+                <p class="mb-2">Time: <span id="final-time">00:00</span></p>
+                <p class="mb-4">Pairs Matched: <span id="final-pairs">0</span>/<span id="final-total">0</span></p>
+                <button id="btn-finish" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded">
+                    Finish
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+.flashcard-flip {
+  transform: rotateY(180deg);
+  transition: transform 0.6s;
+}
+
+#flashcard {
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+#flashcard-back {
+  transform: rotateY(180deg);
+}
+
+.hidden {
+  display: none;
+}
+
+.progress-bar {
+  width: 100%;
+}
+
+.progress {
+  transition: width 0.3s ease;
+}

@@ -12,6 +12,31 @@
     "group_name": "Basic Greetings"
   },
   {
+    "nepali_word": "शुभ प्रभात",
+    "group_name": "Basic Greetings"
+  },
+  {
+    "nepali_word": "शुभ रात्री",
+    "group_name": "Basic Greetings"
+  },
+  {
+    "nepali_word": "शुभ दिन",
+    "group_name": "Basic Greetings"
+  },
+  {
+    "nepali_word": "शुभ बिदा",
+    "group_name": "Basic Greetings"
+  },
+  {
+    "nepali_word": "स्वागतम्",
+    "group_name": "Basic Greetings"
+  },
+  {
+    "nepali_word": "फेरी भेटौला",
+    "group_name": "Basic Greetings"
+  },
+
+  {
     "nepali_word": "बुवा",
     "group_name": "Family Members"
   },
@@ -27,6 +52,55 @@
     "nepali_word": "दिदी",
     "group_name": "Family Members"
   },
+  {
+    "nepali_word": "भाइ",
+    "group_name": "Family Members"
+  },
+  {
+    "nepali_word": "बहिनी",
+    "group_name": "Family Members"
+  },
+  {
+    "nepali_word": "हजुरआमा",
+    "group_name": "Family Members"
+  },
+  {
+    "nepali_word": "हजुरबुबा",
+    "group_name": "Family Members"
+  },
+  {
+    "nepali_word": "काका",
+    "group_name": "Family Members"
+  },
+  {
+    "nepali_word": "काकी",
+    "group_name": "Family Members"
+  },
+  {
+    "nepali_word": "मामा",
+    "group_name": "Family Members"
+  },
+  {
+    "nepali_word": "माइजू",
+    "group_name": "Family Members"
+  },
+  {
+    "nepali_word": "भतिज",
+    "group_name": "Family Members"
+  },
+  {
+    "nepali_word": "भतिजी",
+    "group_name": "Family Members"
+  },
+  {
+    "nepali_word": "जेठाजु",
+    "group_name": "Family Members"
+  },
+  {
+    "nepali_word": "भाउजू",
+    "group_name": "Family Members"
+  },
+
   {
     "nepali_word": "एक",
     "group_name": "Numbers 1-20"
@@ -107,12 +181,142 @@
     "nepali_word": "बीस",
     "group_name": "Numbers 1-20"
   },
+
+  {
+    "nepali_word": "एक्काइस",
+    "group_name": "Numbers 21-100"
+  },
+  {
+    "nepali_word": "बाइस",
+    "group_name": "Numbers 21-100"
+  },
+  {
+    "nepali_word": "तेइस",
+    "group_name": "Numbers 21-100"
+  },
+  {
+    "nepali_word": "चौबिस",
+    "group_name": "Numbers 21-100"
+  },
+  {
+    "nepali_word": "पच्चीस",
+    "group_name": "Numbers 21-100"
+  },
+  {
+    "nepali_word": "छब्बिस",
+    "group_name": "Numbers 21-100"
+  },
+  {
+    "nepali_word": "सत्ताइस",
+    "group_name": "Numbers 21-100"
+  },
+  {
+    "nepali_word": "अट्ठाइस",
+    "group_name": "Numbers 21-100"
+  },
+  {
+    "nepali_word": "उनन्तीस",
+    "group_name": "Numbers 21-100"
+  },
+  {
+    "nepali_word": "तीस",
+    "group_name": "Numbers 21-100"
+  },
+  {
+    "nepali_word": "चालीस",
+    "group_name": "Numbers 21-100"
+  },
+  {
+    "nepali_word": "पचास",
+    "group_name": "Numbers 21-100"
+  },
+  {
+    "nepali_word": "साठी",
+    "group_name": "Numbers 21-100"
+  },
+  {
+    "nepali_word": "सत्तरी",
+    "group_name": "Numbers 21-100"
+  },
+  {
+    "nepali_word": "अस्सी",
+    "group_name": "Numbers 21-100"
+  },
+  {
+    "nepali_word": "नब्बे",
+    "group_name": "Numbers 21-100"
+  },
+  {
+    "nepali_word": "सय",
+    "group_name": "Numbers 21-100"
+  },
+
   {
     "nepali_word": "खाना",
     "group_name": "Basic Food Items"
   },
   {
     "nepali_word": "पानी",
+    "group_name": "Basic Food Items"
+  },
+  {
+    "nepali_word": "मासु",
+    "group_name": "Basic Food Items"
+  },
+  {
+    "nepali_word": "भात",
+    "group_name": "Basic Food Items"
+  },
+  {
+    "nepali_word": "दाल",
+    "group_name": "Basic Food Items"
+  },
+  {
+    "nepali_word": "तरकारी",
+    "group_name": "Basic Food Items"
+  },
+  {
+    "nepali_word": "चिया",
+    "group_name": "Basic Food Items"
+  },
+  {
+    "nepali_word": "दूध",
+    "group_name": "Basic Food Items"
+  },
+  {
+    "nepali_word": "फलफूल",
+    "group_name": "Basic Food Items"
+  },
+  {
+    "nepali_word": "सयपत्री",
+    "group_name": "Basic Food Items"
+  },
+  {
+    "nepali_word": "आलु",
+    "group_name": "Basic Food Items"
+  },
+  {
+    "nepali_word": "मकै",
+    "group_name": "Basic Food Items"
+  },
+  {
+    "nepali_word": "चामल",
+    "group_name": "Basic Food Items"
+  },
+  {
+    "nepali_word": "कफी",
+    "group_name": "Basic Food Items"
+  },
+  {
+    "nepali_word": "चिनि",
+    "group_name": "Basic Food Items"
+  },
+  {
+    "nepali_word": "नुन",
+    "group_name": "Basic Food Items"
+  },
+  {
+    "nepali_word": "खुर्सानी",
     "group_name": "Basic Food Items"
   },
   {
@@ -128,11 +332,124 @@
     "group_name": "Colors"
   },
   {
+    "nepali_word": "कालो",
+    "group_name": "Colors"
+  },
+  {
+    "nepali_word": "सेतो",
+    "group_name": "Colors"
+  },
+  {
+    "nepali_word": "पहेंलो",
+    "group_name": "Colors"
+  },
+  {
+    "nepali_word": "सुन्तला",
+    "group_name": "Colors"
+  },
+  {
+    "nepali_word": "बैंगनी",
+    "group_name": "Colors"
+  },
+  {
+    "nepali_word": "खैरो",
+    "group_name": "Colors"
+  },
+  {
+    "nepali_word": "गुलाबी",
+    "group_name": "Colors"
+  },
+  {
+    "nepali_word": "फिका",
+    "group_name": "Colors"
+  },
+  {
+    "nepali_word": "गाढा",
+    "group_name": "Colors"
+  },
+
+  {
     "nepali_word": "खान्छु",
     "group_name": "Common Verbs"
   },
   {
     "nepali_word": "जान्छु",
+    "group_name": "Common Verbs"
+  },
+  {
+    "nepali_word": "हेर्छु",
+    "group_name": "Common Verbs"
+  },
+  {
+    "nepali_word": "सुन्छु",
+    "group_name": "Common Verbs"
+  },
+  {
+    "nepali_word": "बोल्छु",
+    "group_name": "Common Verbs"
+  },
+  {
+    "nepali_word": "पढ्छु",
+    "group_name": "Common Verbs"
+  },
+  {
+    "nepali_word": "लेख्छु",
+    "group_name": "Common Verbs"
+  },
+  {
+    "nepali_word": "बस्छु",
+    "group_name": "Common Verbs"
+  },
+  {
+    "nepali_word": "उभिन्छु",
+    "group_name": "Common Verbs"
+  },
+  {
+    "nepali_word": "सुत्छु",
+    "group_name": "Common Verbs"
+  },
+  {
+    "nepali_word": "उठ्छु",
+    "group_name": "Common Verbs"
+  },
+  {
+    "nepali_word": "हिँड्छु",
+    "group_name": "Common Verbs"
+  },
+  {
+    "nepali_word": "दौडन्छु",
+    "group_name": "Common Verbs"
+  },
+  {
+    "nepali_word": "गर्छु",
+    "group_name": "Common Verbs"
+  },
+  {
+    "nepali_word": "लिन्छु",
+    "group_name": "Common Verbs"
+  },
+  {
+    "nepali_word": "दिन्छु",
+    "group_name": "Common Verbs"
+  },
+  {
+    "nepali_word": "किन्छु",
+    "group_name": "Common Verbs"
+  },
+  {
+    "nepali_word": "बेच्छु",
+    "group_name": "Common Verbs"
+  },
+  {
+    "nepali_word": "खेल्छु",
+    "group_name": "Common Verbs"
+  },
+  {
+    "nepali_word": "सिक्छु",
+    "group_name": "Common Verbs"
+  },
+  {
+    "nepali_word": "पढाउँछु",
     "group_name": "Common Verbs"
   },
   {
@@ -210,5 +527,78 @@
   {
     "nepali_word": "चैत्र",
     "group_name": "Days and Months"
+  },
+  {
+    "nepali_word": "घाम",
+    "group_name": "Weather Terms"
+  },
+  {
+    "nepali_word": "पानी",
+    "group_name": "Weather Terms"
+  },
+  {
+    "nepali_word": "हिउँ",
+    "group_name": "Weather Terms"
+  },
+  {
+    "nepali_word": "बादल",
+    "group_name": "Weather Terms"
+  },
+  {
+    "nepali_word": "हावा",
+    "group_name": "Weather Terms"
+  },
+  {
+    "nepali_word": "आँधी",
+    "group_name": "Weather Terms"
+  },
+  {
+    "nepali_word": "बिजुली",
+    "group_name": "Weather Terms"
+  },
+  {
+    "nepali_word": "गर्जन",
+    "group_name": "Weather Terms"
+  },
+  {
+    "nepali_word": "तुसारो",
+    "group_name": "Weather Terms"
+  },
+  {
+    "nepali_word": "तातो",
+    "group_name": "Weather Terms"
+  },
+  {
+    "nepali_word": "चिसो",
+    "group_name": "Weather Terms"
+  },
+
+  {
+    "nepali_word": "टाउको",
+    "group_name": "Body Parts"
+  },
+  {
+    "nepali_word": "अनुहार",
+    "group_name": "Body Parts"
+  },
+  {
+    "nepali_word": "आँखा",
+    "group_name": "Body Parts"
+  },
+  {
+    "nepali_word": "नाक",
+    "group_name": "Body Parts"
+  },
+  {
+    "nepali_word": "कान",
+    "group_name": "Body Parts"
+  },
+  {
+    "nepali_word": "मुख",
+    "group_name": "Body Parts"
+  },
+  {
+    "nepali_word": "दाँत",
+    "group_name": "Body Parts"
   }
 ]

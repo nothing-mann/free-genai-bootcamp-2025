@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply min-h-screen bg-base-100 text-base-content transition-colors duration-200;
+  }
+}
+
+@layer components {
+  .container-narrow {
+    @apply container mx-auto px-4 max-w-5xl;
+  }
+  
+  .page-title {
+    @apply text-2xl font-bold mb-6;
+  }
+  
+  .card-bordered {
+    @apply card bg-base-100 border border-base-300 shadow-sm;
+  }
+}

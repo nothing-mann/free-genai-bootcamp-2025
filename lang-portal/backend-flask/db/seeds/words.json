@@ -316,5 +316,581 @@
     "romanized_nepali_word": "chaitra",
     "english_word": "March-April",
     "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "शुभ प्रभात",
+    "romanized_nepali_word": "shubha prabhat",
+    "english_word": "good morning",
+    "part_of_speech": "[\"greeting\"]"
+  },
+  {
+    "nepali_word": "शुभ रात्री",
+    "romanized_nepali_word": "shubha ratri",
+    "english_word": "good night",
+    "part_of_speech": "[\"greeting\"]"
+  },
+  {
+    "nepali_word": "शुभ दिन",
+    "romanized_nepali_word": "shubha din",
+    "english_word": "good day",
+    "part_of_speech": "[\"greeting\"]"
+  },
+  {
+    "nepali_word": "शुभ बिदा",
+    "romanized_nepali_word": "shubha bida",
+    "english_word": "goodbye",
+    "part_of_speech": "[\"greeting\"]"
+  },
+  {
+    "nepali_word": "स्वागतम्",
+    "romanized_nepali_word": "swagatam",
+    "english_word": "welcome",
+    "part_of_speech": "[\"greeting\"]"
+  },
+  {
+    "nepali_word": "फेरी भेटौला",
+    "romanized_nepali_word": "feri bhetaula",
+    "english_word": "see you again",
+    "part_of_speech": "[\"phrase\"]"
+  },
+  {
+    "nepali_word": "भाइ",
+    "romanized_nepali_word": "bhai",
+    "english_word": "younger brother",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "बहिनी",
+    "romanized_nepali_word": "bahini",
+    "english_word": "younger sister",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "हजुरआमा",
+    "romanized_nepali_word": "hajur ama",
+    "english_word": "grandmother",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "हजुरबुबा",
+    "romanized_nepali_word": "hajur buba",
+    "english_word": "grandfather",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "काका",
+    "romanized_nepali_word": "kaka",
+    "english_word": "paternal uncle",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "काकी",
+    "romanized_nepali_word": "kaki",
+    "english_word": "paternal aunt",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "मामा",
+    "romanized_nepali_word": "mama",
+    "english_word": "maternal uncle",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "माइजू",
+    "romanized_nepali_word": "maiju",
+    "english_word": "maternal aunt",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "भतिज",
+    "romanized_nepali_word": "bhatij",
+    "english_word": "nephew",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "भतिजी",
+    "romanized_nepali_word": "bhatiji",
+    "english_word": "niece",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "जेठाजु",
+    "romanized_nepali_word": "jethaju",
+    "english_word": "elder sister's husband",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "भाउजू",
+    "romanized_nepali_word": "bhauju",
+    "english_word": "elder brother's wife",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "एक्काइस",
+    "romanized_nepali_word": "ekkais",
+    "english_word": "twenty-one",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "बाइस",
+    "romanized_nepali_word": "bais",
+    "english_word": "twenty-two",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "तेइस",
+    "romanized_nepali_word": "teis",
+    "english_word": "twenty-three",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "चौबिस",
+    "romanized_nepali_word": "chaubis",
+    "english_word": "twenty-four",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "पच्चीस",
+    "romanized_nepali_word": "pachis",
+    "english_word": "twenty-five",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "छब्बिस",
+    "romanized_nepali_word": "chhabbis",
+    "english_word": "twenty-six",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "सत्ताइस",
+    "romanized_nepali_word": "sattais",
+    "english_word": "twenty-seven",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "अट्ठाइस",
+    "romanized_nepali_word": "atthais",
+    "english_word": "twenty-eight",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "उनन्तीस",
+    "romanized_nepali_word": "unantis",
+    "english_word": "twenty-nine",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "तीस",
+    "romanized_nepali_word": "tis",
+    "english_word": "thirty",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "चालीस",
+    "romanized_nepali_word": "chalis",
+    "english_word": "forty",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "पचास",
+    "romanized_nepali_word": "pachas",
+    "english_word": "fifty",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "साठी",
+    "romanized_nepali_word": "sathi",
+    "english_word": "sixty",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "सत्तरी",
+    "romanized_nepali_word": "sattari",
+    "english_word": "seventy",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "अस्सी",
+    "romanized_nepali_word": "assi",
+    "english_word": "eighty",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "नब्बे",
+    "romanized_nepali_word": "nabbe",
+    "english_word": "ninety",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "सय",
+    "romanized_nepali_word": "saya",
+    "english_word": "hundred",
+    "part_of_speech": "[\"number\"]"
+  },
+  {
+    "nepali_word": "मासु",
+    "romanized_nepali_word": "masu",
+    "english_word": "meat",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "भात",
+    "romanized_nepali_word": "bhat",
+    "english_word": "rice (cooked)",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "दाल",
+    "romanized_nepali_word": "dal",
+    "english_word": "lentil soup",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "तरकारी",
+    "romanized_nepali_word": "tarkari",
+    "english_word": "vegetable curry",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "चिया",
+    "romanized_nepali_word": "chiya",
+    "english_word": "tea",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "दूध",
+    "romanized_nepali_word": "dudh",
+    "english_word": "milk",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "फलफूल",
+    "romanized_nepali_word": "phalphul",
+    "english_word": "fruit",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "सयपत्री",
+    "romanized_nepali_word": "sayapatri",
+    "english_word": "bread",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "आलु",
+    "romanized_nepali_word": "aalu",
+    "english_word": "potato",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "मकै",
+    "romanized_nepali_word": "makai",
+    "english_word": "corn",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "चामल",
+    "romanized_nepali_word": "chamal",
+    "english_word": "rice (uncooked)",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "कफी",
+    "romanized_nepali_word": "kafi",
+    "english_word": "coffee",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "चिनि",
+    "romanized_nepali_word": "chini",
+    "english_word": "sugar",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "नुन",
+    "romanized_nepali_word": "nun",
+    "english_word": "salt",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "खुर्सानी",
+    "romanized_nepali_word": "khursani",
+    "english_word": "chili",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "कालो",
+    "romanized_nepali_word": "kalo",
+    "english_word": "black",
+    "part_of_speech": "[\"adjective\"]"
+  },
+  {
+    "nepali_word": "सेतो",
+    "romanized_nepali_word": "seto",
+    "english_word": "white",
+    "part_of_speech": "[\"adjective\"]"
+  },
+  {
+    "nepali_word": "पहेंलो",
+    "romanized_nepali_word": "pahelo",
+    "english_word": "yellow",
+    "part_of_speech": "[\"adjective\"]"
+  },
+  {
+    "nepali_word": "सुन्तला",
+    "romanized_nepali_word": "suntala",
+    "english_word": "orange",
+    "part_of_speech": "[\"adjective\"]"
+  },
+  {
+    "nepali_word": "बैंगनी",
+    "romanized_nepali_word": "baingani",
+    "english_word": "purple",
+    "part_of_speech": "[\"adjective\"]"
+  },
+  {
+    "nepali_word": "खैरो",
+    "romanized_nepali_word": "khairo",
+    "english_word": "brown",
+    "part_of_speech": "[\"adjective\"]"
+  },
+  {
+    "nepali_word": "गुलाबी",
+    "romanized_nepali_word": "gulabi",
+    "english_word": "pink",
+    "part_of_speech": "[\"adjective\"]"
+  },
+  {
+    "nepali_word": "फिका",
+    "romanized_nepali_word": "fika",
+    "english_word": "light/pale",
+    "part_of_speech": "[\"adjective\"]"
+  },
+  {
+    "nepali_word": "गाढा",
+    "romanized_nepali_word": "gadha",
+    "english_word": "dark",
+    "part_of_speech": "[\"adjective\"]"
+  },
+  {
+    "nepali_word": "हेर्छु",
+    "romanized_nepali_word": "herchu",
+    "english_word": "look",
+    "part_of_speech": "[\"verb\"]"
+  },
+  {
+    "nepali_word": "सुन्छु",
+    "romanized_nepali_word": "sunchu",
+    "english_word": "listen",
+    "part_of_speech": "[\"verb\"]"
+  },
+  {
+    "nepali_word": "बोल्छु",
+    "romanized_nepali_word": "bolchu",
+    "english_word": "speak",
+    "part_of_speech": "[\"verb\"]"
+  },
+  {
+    "nepali_word": "पढ्छु",
+    "romanized_nepali_word": "padhchu",
+    "english_word": "read",
+    "part_of_speech": "[\"verb\"]"
+  },
+  {
+    "nepali_word": "लेख्छु",
+    "romanized_nepali_word": "lekhchu",
+    "english_word": "write",
+    "part_of_speech": "[\"verb\"]"
+  },
+  {
+    "nepali_word": "बस्छु",
+    "romanized_nepali_word": "baschu",
+    "english_word": "sit",
+    "part_of_speech": "[\"verb\"]"
+  },
+  {
+    "nepali_word": "उभिन्छु",
+    "romanized_nepali_word": "ubhinchu",
+    "english_word": "stand",
+    "part_of_speech": "[\"verb\"]"
+  },
+  {
+    "nepali_word": "सुत्छु",
+    "romanized_nepali_word": "sutchu",
+    "english_word": "sleep",
+    "part_of_speech": "[\"verb\"]"
+  },
+  {
+    "nepali_word": "उठ्छु",
+    "romanized_nepali_word": "uthchu",
+    "english_word": "get up",
+    "part_of_speech": "[\"verb\"]"
+  },
+  {
+    "nepali_word": "हिँड्छु",
+    "romanized_nepali_word": "hindchu",
+    "english_word": "walk",
+    "part_of_speech": "[\"verb\"]"
+  },
+  {
+    "nepali_word": "दौडन्छु",
+    "romanized_nepali_word": "daudanchu",
+    "english_word": "run",
+    "part_of_speech": "[\"verb\"]"
+  },
+  {
+    "nepali_word": "गर्छु",
+    "romanized_nepali_word": "garchu",
+    "english_word": "do",
+    "part_of_speech": "[\"verb\"]"
+  },
+  {
+    "nepali_word": "लिन्छु",
+    "romanized_nepali_word": "linchu",
+    "english_word": "take",
+    "part_of_speech": "[\"verb\"]"
+  },
+  {
+    "nepali_word": "दिन्छु",
+    "romanized_nepali_word": "dinchu",
+    "english_word": "give",
+    "part_of_speech": "[\"verb\"]"
+  },
+  {
+    "nepali_word": "किन्छु",
+    "romanized_nepali_word": "kinchu",
+    "english_word": "buy",
+    "part_of_speech": "[\"verb\"]"
+  },
+  {
+    "nepali_word": "बेच्छु",
+    "romanized_nepali_word": "bechchu",
+    "english_word": "sell",
+    "part_of_speech": "[\"verb\"]"
+  },
+  {
+    "nepali_word": "खेल्छु",
+    "romanized_nepali_word": "khelchu",
+    "english_word": "play",
+    "part_of_speech": "[\"verb\"]"
+  },
+  {
+    "nepali_word": "सिक्छु",
+    "romanized_nepali_word": "sikchu",
+    "english_word": "learn",
+    "part_of_speech": "[\"verb\"]"
+  },
+  {
+    "nepali_word": "पढाउँछु",
+    "romanized_nepali_word": "padhaunchhu",
+    "english_word": "teach",
+    "part_of_speech": "[\"verb\"]"
+  },
+  {
+    "nepali_word": "घाम",
+    "romanized_nepali_word": "gham",
+    "english_word": "sun",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "पानी",
+    "romanized_nepali_word": "pani",
+    "english_word": "rain",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "हिउँ",
+    "romanized_nepali_word": "hiun",
+    "english_word": "snow",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "बादल",
+    "romanized_nepali_word": "badal",
+    "english_word": "cloud",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "हावा",
+    "romanized_nepali_word": "hawa",
+    "english_word": "wind",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "आँधी",
+    "romanized_nepali_word": "aandhi",
+    "english_word": "storm",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "बिजुली",
+    "romanized_nepali_word": "bijuli",
+    "english_word": "lightning",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "गर्जन",
+    "romanized_nepali_word": "garjan",
+    "english_word": "thunder",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "तुसारो",
+    "romanized_nepali_word": "tusaro",
+    "english_word": "fog",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "तातो",
+    "romanized_nepali_word": "tato",
+    "english_word": "hot",
+    "part_of_speech": "[\"adjective\"]"
+  },
+  {
+    "nepali_word": "चिसो",
+    "romanized_nepali_word": "chiso",
+    "english_word": "cold",
+    "part_of_speech": "[\"adjective\"]"
+  },
+  {
+    "nepali_word": "टाउको",
+    "romanized_nepali_word": "tauko",
+    "english_word": "head",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "अनुहार",
+    "romanized_nepali_word": "anuhar",
+    "english_word": "face",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "आँखा",
+    "romanized_nepali_word": "aankha",
+    "english_word": "eye",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "नाक",
+    "romanized_nepali_word": "nak",
+    "english_word": "nose",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "कान",
+    "romanized_nepali_word": "kan",
+    "english_word": "ear",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "मुख",
+    "romanized_nepali_word": "mukh",
+    "english_word": "mouth",
+    "part_of_speech": "[\"noun\"]"
+  },
+  {
+    "nepali_word": "दाँत",
+    "romanized_nepali_word": "daat",
+    "english_word": "tooth",
+    "part_of_speech": "[\"noun\"]"
   }
 ]

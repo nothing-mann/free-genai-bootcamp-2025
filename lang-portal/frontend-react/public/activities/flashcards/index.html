@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards Activity</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-8">
+            <h1 class="text-3xl font-bold text-center text-blue-600">Flashcards</h1>
+            <p class="text-center text-gray-600" id="group-name">Loading group...</p>
+        </header>
+        
+        <div class="max-w-md mx-auto">
+            <div class="progress-bar mb-6 bg-gray-200 rounded-full h-2.5">
+                <div class="progress bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+            </div>
+            
+            <div id="flashcard" class="bg-white rounded-lg shadow-lg p-6 h-64 flex flex-col items-center justify-center cursor-pointer">
+                <div id="flashcard-front" class="text-2xl font-bold text-center">Loading...</div>
+                <div id="flashcard-back" class="text-xl text-gray-600 mt-4 text-center hidden">Loading...</div>
+            </div>
+            
+            <div class="flex justify-between mt-6">
+                <button id="btn-wrong" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded disabled:bg-gray-300">
+                    Don't Know
+                </button>
+                <button id="btn-flip" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded">
+                    Flip
+                </button>
+                <button id="btn-correct" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded disabled:bg-gray-300">
+                    Know
+                </button>
+            </div>
+            
+            <div class="text-center mt-8">
+                <span id="current-count">0</span>/<span id="total-count">0</span> words
+            </div>
+            
+            <div class="mt-8 text-center hidden" id="results-container">
+                <h2 class="text-2xl font-bold mb-4">Activity Complete!</h2>
+                <div class="flex justify-center items-center mb-4">
+                    <div class="w-32 h-32 rounded-full flex items-center justify-center">
+                        <div class="text-4xl font-bold" id="score-display">0%</div>
+                    </div>
+                </div>
+                <p class="mb-2">Correct: <span id="correct-count">0</span></p>
+                <p class="mb-4">Incorrect: <span id="incorrect-count">0</span></p>
+                <button id="btn-finish" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded">
+                    Finish
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>

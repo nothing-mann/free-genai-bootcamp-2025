@@ -1,0 +1,119 @@
+{
+  "app": {
+    "title": "भाषा अध्ययन पोर्टल"
+  },
+  "nav": {
+    "dashboard": "ड्यासबोर्ड",
+    "studyActivities": "अध्ययन गतिविधिहरू",
+    "words": "शब्दहरू",
+    "groups": "शब्द समूहहरू",
+    "studySessions": "अध्ययन सत्रहरू",
+    "settings": "सेटिङहरू"
+  },
+  "common": {
+    "loading": "लोड हुँदैछ...",
+    "error": "त्रुटि",
+    "retry": "पुन: प्रयास गर्नुहोस्",
+    "noData": "कुनै डेटा उपलब्ध छैन",
+    "pagination": {
+      "prev": "अघिल्लो",
+      "next": "अर्को",
+      "page": "पृष्ठ"
+    },
+    "buttons": {
+      "save": "सुरक्षित गर्नुहोस्",
+      "cancel": "रद्द गर्नुहोस्",
+      "confirm": "पुष्टि गर्नुहोस्"
+    }
+  },
+  "dashboard": {
+    "title": "ड्यासबोर्ड",
+    "statistics": {
+      "title": "तथ्यांकहरू",
+      "successRate": "सफलता दर",
+      "studySessions": "अध्ययन सत्रहरू",
+      "activeGroups": "सक्रिय समूहहरू",
+      "studyStreak": "अध्ययन स्ट्रिक"
+    },
+    "studyProgress": {
+      "title": "अध्ययन प्रगति",
+      "wordsStudied": "अध्ययन गरिएका शब्दहरू",
+      "timeSpent": "बिताइएको समय",
+      "masteryProgress": "निपुणता प्रगति"
+    },
+    "lastSession": {
+      "title": "अन्तिम अध्ययन सत्र",
+      "totalWords": "कुल शब्दहरू",
+      "correctWords": "सही शब्दहरू",
+      "wrongWords": "गलत शब्दहरू",
+      "viewGroup": "समूह हेर्नुहोस्"
+    },
+    "startStudy": "अध्ययन सुरु गर्नुहोस्"
+  },
+  "words": {
+    "title": "शब्दहरू",
+    "details": "शब्द विवरण",
+    "nepaliWord": "नेपाली शब्द",
+    "romanizedWord": "रोमनाइज्ड",
+    "englishWord": "अंग्रेजी शब्द",
+    "partOfSpeech": "व्याकरण भाग",
+    "statistics": "अध्ययन तथ्यांकहरू",
+    "correct": "सही",
+    "wrong": "गलत",
+    "groups": "शब्द समूहहरू",
+    "noGroups": "यो शब्द कुनै पनि समूहमा छैन"
+  },
+  "groups": {
+    "title": "शब्द समूहहरू",
+    "details": "समूह विवरण",
+    "name": "समूहको नाम",
+    "description": "विवरण",
+    "createdAt": "सिर्जना गरिएको",
+    "statistics": "समूह तथ्यांकहरू",
+    "words": "यस समूहमा शब्दहरू",
+    "studySessions": "हालका अध्ययन सत्रहरू",
+    "noWords": "यस समूहमा कुनै शब्दहरू छैनन्",
+    "noSessions": "यस समूहको लागि कुनै अध्ययन सत्रहरू छैनन्"
+  },
+  "studyActivities": {
+    "title": "अध्ययन गतिविधिहरू",
+    "details": "अध्ययन गतिविधि विवरण",
+    "launch": "गतिविधि सुरु गर्नुहोस्",
+    "view": "विवरण हेर्नुहोस्",
+    "pastSessions": "पुराना अध्ययन सत्रहरू",
+    "selectGroup": "शब्द समूह चयन गर्नुहोस्",
+    "launchNow": "अहिले सुरु गर्नुहोस्"
+  },
+  "studySessions": {
+    "title": "अध्ययन सत्रहरू",
+    "details": "अध्ययन सत्र विवरण",
+    "activity": "गतिविधि",
+    "group": "समूह",
+    "date": "मिति",
+    "startTime": "सुरु समय",
+    "endTime": "समाप्ति समय",
+    "duration": "अवधि",
+    "items": "आइटमहरू",
+    "score": "स्कोर",
+    "wordReviewItems": "शब्द समीक्षा आइटमहरू",
+    "result": "परिणाम",
+    "time": "समय"
+  },
+  "settings": {
+    "title": "सेटिङहरू",
+    "theme": "थिम",
+    "language": "भाषा",
+    "resetHistory": "इतिहास रिसेट गर्नुहोस्",
+    "fullReset": "पूर्ण रिसेट",
+    "confirmReset": "के तपाईं निश्चित हुनुहुन्छ? यो कार्य पूर्ववत गर्न सकिँदैन।",
+    "resetHistoryDescription": "यसले सबै अध्ययन सत्रहरू र शब्द समीक्षा आइटमहरू मेटाउनेछ।",
+    "fullResetDescription": "यसले सबै डेटा शब्दहरू र समूहहरू सहित प्रारम्भिक बीज डेटामा रिसेट गर्नेछ।"
+  },
+  "errors": {
+    "notFound": "पृष्ठ फेला परेन",
+    "notFoundMessage": "तपाईंले खोजिरहनुभएको पृष्ठ अवस्थित छैन वा सारिएको छ।",
+    "backToDashboard": "ड्यासबोर्डमा फर्कनुहोस्",
+    "serverError": "सर्भर त्रुटि"
+  },
+  "days": "दिन"
+}
