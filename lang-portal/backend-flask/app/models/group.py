@@ -1,6 +1,7 @@
 from app.models.base import BaseModel, db
 from sqlalchemy import func
 from app.models.word_review import WordReviewItem
+from datetime import datetime, UTC
 
 # Define the association table
 words_groups = db.Table('words_groups',
@@ -13,6 +14,8 @@ class Group(BaseModel):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text)
+    created_at = db.Column(db.DateTime(timezone=True), nullable=False, default=lambda: datetime.now(UTC))
+    updated_at = db.Column(db.DateTime(timezone=True), onupdate=lambda: datetime.now(UTC))
     
     # Define the many-to-many relationship with back_populates
     words = db.relationship('Word', 
@@ -50,4 +53,12 @@ class Group(BaseModel):
             "correct_count": correct_reviews or 0,
             "wrong_count": wrong_reviews or 0,
             "total_count": total_reviews or 0
+        }
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'total_words': self.total_words
         }

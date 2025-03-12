@@ -8,7 +8,8 @@ import {
   Card, 
   LoadingSpinner, 
   ErrorDisplay, 
-  EmptyState 
+  EmptyState,
+  Pagination 
 } from '@/components/common';
 
 const StudyActivityLaunch = () => {
@@ -16,6 +17,8 @@ const StudyActivityLaunch = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [selectedGroupId, setSelectedGroupId] = useState<number | null>(null);
+  const [page, setPage] = useState(1);
+  const pageSize = 20;
 
   // Fetch activity details
   const { 
@@ -33,7 +36,7 @@ const StudyActivityLaunch = () => {
     isError: groupsIsError,
     error: groupsError,
     refetch: groupsRefetch
-  } = useGroups(1, 100); // Get all groups
+  } = useGroups(page, pageSize);
 
   // Launch study session mutation
   const launchMutation = useLaunchStudyActivity();
@@ -63,6 +66,7 @@ const StudyActivityLaunch = () => {
   // Extract data from the API responses
   const activity = activityData?.data;
   const groups = groupsData?.data?.word_groups || [];
+  const pagination = groupsData?.meta?.pagination;
 
   if (!activity) {
     return (
@@ -151,6 +155,16 @@ const StudyActivityLaunch = () => {
             </div>
           ))}
         </div>
+
+        {pagination && pagination.total_pages > 1 && (
+          <div className="mt-4 mb-6">
+            <Pagination
+              currentPage={pagination.page}
+              totalPages={pagination.total_pages}
+              onPageChange={setPage}
+            />
+          </div>
+        )}
         
         <div className="flex justify-end">
           <button 

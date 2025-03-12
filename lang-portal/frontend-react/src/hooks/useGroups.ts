@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
 import { 
   getGroups, 
   getGroup, 
@@ -11,6 +11,7 @@ import {
 } from '@/services/groupService';
 
 export const useGroups = (page = 1, pageSize = 20) => {
+  // Change back to regular query for simpler pagination
   return useQuery<GroupsApiResponse, Error>({
     queryKey: ['groups', page, pageSize],
     queryFn: () => getGroups(page, pageSize),
