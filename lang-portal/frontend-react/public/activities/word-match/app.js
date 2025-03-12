@@ -220,13 +220,13 @@ document.addEventListener('DOMContentLoaded', () => {
         ...(token ? { 'Authorization': `Bearer ${token}` } : {})
       };
 
-      // Convert wordResults to array of results
+      // Convert wordResults to array and submit reviews
       const results = Object.entries(wordResults).map(([wordId, isCorrect]) => ({
         wordId: parseInt(wordId),
         isCorrect
       }));
 
-      // Submit individual results
+      // Submit individual word reviews
       await Promise.all(results.map(result => 
         fetch(`${API_BASE_URL}/study-sessions/${sessionId}/words/${result.wordId}/review`, {
           method: 'POST',
@@ -235,19 +235,22 @@ document.addEventListener('DOMContentLoaded', () => {
         })
       ));
 
-      // End the session
+      // End session with stats
       await fetch(`${API_BASE_URL}/study-sessions/${sessionId}/end`, {
         method: 'POST',
-        headers
+        headers,
+        body: JSON.stringify({
+          correct_count: matched,
+          total_count: words.length,
+          duration_seconds: secondsElapsed
+        })
       });
 
-      // Close the window after a short delay to allow the parent window to update
-      setTimeout(() => {
-        window.close();
-      }, 1000);
+      // Close window after delay
+      setTimeout(() => window.close(), 1000);
     } catch (error) {
       console.error('Error submitting results:', error);
-      alert('Failed to submit some results. Please try again.');
+      alert('Failed to submit results. Please try again.');
     }
   }
   

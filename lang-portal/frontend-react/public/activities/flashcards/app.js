@@ -37,6 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let correctAnswers = 0;
   let incorrectAnswers = 0;
   let results = [];
+  const startTime = Date.now(); // Track start time
+  let endTime; // Track end time
   
   // Disable answer buttons initially
   btnCorrect.disabled = true;
@@ -148,6 +150,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Show results at the end of the activity
   function showResults() {
+    endTime = Date.now(); // Record end time when activity completes
+    const durationSeconds = Math.floor((endTime - startTime) / 1000);
+    
     // Hide the flashcard
     flashcard.classList.add('hidden');
     btnFlip.classList.add('hidden');
@@ -164,11 +169,11 @@ document.addEventListener('DOMContentLoaded', () => {
     incorrectCount.textContent = incorrectAnswers;
     
     // Submit results to the main application
-    submitResults();
+    submitResults(durationSeconds);
   }
   
   // Submit results to the API
-  async function submitResults() {
+  async function submitResults(durationSeconds) {
     try {
       const token = localStorage.getItem('token');
       const headers = {
@@ -176,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ...(token ? { 'Authorization': `Bearer ${token}` } : {})
       };
 
-      // Submit individual results
+      // Submit individual word reviews first
       await Promise.all(results.map(result => 
         fetch(`${API_BASE_URL}/study-sessions/${sessionId}/words/${result.wordId}/review`, {
           method: 'POST',
@@ -185,19 +190,22 @@ document.addEventListener('DOMContentLoaded', () => {
         })
       ));
 
-      // End the session
+      // End the session with stats including duration
       await fetch(`${API_BASE_URL}/study-sessions/${sessionId}/end`, {
         method: 'POST',
-        headers
+        headers,
+        body: JSON.stringify({
+          correct_count: correctAnswers,
+          total_count: words.length,
+          duration_seconds: durationSeconds
+        })
       });
 
-      // Close the window after a short delay to allow the parent window to update
-      setTimeout(() => {
-        window.close();
-      }, 1000);
+      // Close window after delay
+      setTimeout(() => window.close(), 1000);
     } catch (error) {
       console.error('Error submitting results:', error);
-      alert('Failed to submit some results. Please try again.');
+      alert('Failed to submit results. Please try again.');
     }
   }
   

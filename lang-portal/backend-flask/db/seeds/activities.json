@@ -3,12 +3,12 @@
     "name": "Flashcards",
     "description": "Practice vocabulary with digital flashcards",
     "instructions": "Review words by flipping cards to see translations. Click 'Know' or 'Don't Know' to track your progress.",
-    "thumbnail": "flashcards.jpg"
+    "thumbnail": "thumbnails/flashcards.jpg"
   },
   {
     "name": "Word Match",
     "description": "Match Nepali words with their English translations",
     "instructions": "Connect pairs of matching words within the time limit. Match all pairs to complete the activity.",
-    "thumbnail": "matching.jpg"
+    "thumbnail": "thumbnails/word-match.jpg"
   }
 ]
