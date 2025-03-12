@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useQueryClient } from '@tanstack/react-query';
 import { useStudyActivity, useGroups, useLaunchStudyActivity } from '@/hooks';
 import { generateActivityUrl } from '@/utils/activityUtils';
 import { 
@@ -16,6 +17,7 @@ const StudyActivityLaunch = () => {
   const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [selectedGroupId, setSelectedGroupId] = useState<number | null>(null);
   const [page, setPage] = useState(1);
   const pageSize = 20;
@@ -98,19 +100,32 @@ const StudyActivityLaunch = () => {
         groupId: selectedGroupId
       });
       
-      if (result?.id) {
+      if (result?.id) {  // Check for id directly
+        const sessionId = result.id;
+        
         // Generate the activity URL
         const activityUrl = generateActivityUrl(
           activity.name, 
-          result.id, 
+          sessionId,
           selectedGroupId
         );
-        
-        // Open activity in a new tab
-        window.open(activityUrl, '_blank');
-        
-        // Navigate to the study session for monitoring
-        navigate(`/study-sessions/${result.id}`);
+
+        // Open in new tab with proper window features
+        const activityWindow = window.open(
+          activityUrl,
+          '_blank',
+          'width=800,height=600,scrollbars=yes,status=yes'
+        );
+
+        if (!activityWindow) {
+          alert('Please allow popups for this site to launch activities');
+          return;
+        }
+
+        // Navigate to study session page
+        navigate(`/study-sessions/${sessionId}`);
+      } else {
+        throw new Error('Invalid response format from server');
       }
     } catch (error) {
       console.error("Failed to launch activity", error);

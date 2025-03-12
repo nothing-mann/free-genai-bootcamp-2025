@@ -261,6 +261,7 @@ def create_study_session():
                 status_code=404
             )
         
+        # Create the study session
         session = StudySession(
             group_id=group_id,
             study_activity_id=study_activity_id,
@@ -269,14 +270,22 @@ def create_study_session():
         db.session.add(session)
         db.session.commit()
         
-        return success_response(
-            data={
-                "id": session.id,
-                "group_id": session.group_id,
-                "study_activity_id": session.study_activity_id
-            },
-            message="Study activity created successfully"
-        )
+        # Get all words from the group
+        group_words = [{
+            'id': w.id,
+            'nepali_word': w.nepali_word,
+            'english_word': w.english_word,
+            'romanized_nepali_word': w.romanized_nepali_word
+        } for w in group.words]
+        
+        return jsonify({
+            "success": True,
+            "message": "Study session created successfully",
+            "id": session.id,
+            "group_id": session.group_id,
+            "study_activity_id": session.study_activity_id,
+            "words": group_words
+        })
     except Exception as e:
         db.session.rollback()
         return error_response(

@@ -11,21 +11,26 @@ export const generateActivityUrl = (
   sessionId: number,
   groupId: number
 ): string => {
-  // Base URL for activities - this could come from an environment variable
-  const baseActivityUrl = process.env.REACT_APP_ACTIVITIES_BASE_URL || 'http://localhost:3001';
+  // Use absolute path from the public directory
+  const baseUrl = window.location.origin;
   
-  // Map activity names to their corresponding paths
   const activityPaths: Record<string, string> = {
-    'Flashcards': '/activities/flashcards',
-    'Word Match': '/activities/word-match',
-    // Add new activities here as they're developed
+    'Flashcards': '/activities/flashcards/index.html',
+    'Word Match': '/activities/word-match/index.html',
   };
   
-  // Get the path for the activity, or use a default path
-  const activityPath = activityPaths[activityName] || '/activities/default';
+  const activityPath = activityPaths[activityName];
+  if (!activityPath) {
+    throw new Error(`Unknown activity: ${activityName}`);
+  }
   
-  // Build the complete URL with query parameters
-  return `${baseActivityUrl}${activityPath}?sessionId=${sessionId}&groupId=${groupId}`;
+  // Ensure parameters are properly encoded
+  const params = new URLSearchParams({
+    sessionId: sessionId.toString(),
+    groupId: groupId.toString()
+  });
+  
+  return `${baseUrl}${activityPath}?${params.toString()}`;
 };
 
 /**

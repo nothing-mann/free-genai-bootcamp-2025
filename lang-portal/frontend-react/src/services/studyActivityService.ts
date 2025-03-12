@@ -63,6 +63,12 @@ export interface LaunchStudyActivityResponse {
   message: string;
   group_id: number;
   study_activity_id: number;
+  words: {
+    id: number;
+    nepali_word: string;
+    english_word: string;
+    romanized_nepali_word: string;
+  }[];
 }
 
 /**

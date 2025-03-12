@@ -41,13 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Fetch words for this group
   async function fetchWords() {
     try {
-      const response = await fetch(`${API_BASE_URL}/groups/${groupId}/words?per_page=100`);
+      // Get words directly from group endpoint
+      const response = await fetch(`${API_BASE_URL}/groups/${groupId}/words?per_page=20`);
       if (!response.ok) {
         throw new Error('Failed to fetch words');
       }
       
       const data = await response.json();
-      if (!data.success || !data.data.words || data.data.words.length === 0) {
+      if (!data.success || !data.data?.words || data.data.words.length === 0) {
         throw new Error('No words found in this group');
       }
       
@@ -67,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // Initialize word results
       words.forEach(word => {
-        wordResults[word.id] = false; // Initially not matched
+        wordResults[word.id] = false;
       });
       
       // Start the game
@@ -213,33 +214,40 @@ document.addEventListener('DOMContentLoaded', () => {
   // Submit results to the API
   async function submitResults() {
     try {
+      const token = localStorage.getItem('token');
+      const headers = {
+        'Content-Type': 'application/json',
+        ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+      };
+
+      // Convert wordResults to array of results
       const results = Object.entries(wordResults).map(([wordId, isCorrect]) => ({
         wordId: parseInt(wordId),
-        isCorrect: isCorrect
+        isCorrect
       }));
-      
-      // Post each result individually
-      const postPromises = results.map(result => 
+
+      // Submit individual results
+      await Promise.all(results.map(result => 
         fetch(`${API_BASE_URL}/study-sessions/${sessionId}/words/${result.wordId}/review`, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
+          headers,
           body: JSON.stringify({ is_correct: result.isCorrect })
         })
-      );
-      
-      await Promise.all(postPromises);
-      
+      ));
+
       // End the session
       await fetch(`${API_BASE_URL}/study-sessions/${sessionId}/end`, {
-        method: 'POST'
+        method: 'POST',
+        headers
       });
-      
-      console.log('All results submitted successfully!');
+
+      // Close the window after a short delay to allow the parent window to update
+      setTimeout(() => {
+        window.close();
+      }, 1000);
     } catch (error) {
       console.error('Error submitting results:', error);
-      alert('Failed to submit some results. Your progress might not be fully saved.');
+      alert('Failed to submit some results. Please try again.');
     }
   }
   
